@@ -50,12 +50,14 @@ install-python%: install-prereq
 
 	: # python-twisted-bin
 ifeq ($(DEB_HOST_ARCH_OS), linux)
+ifeq ($(shell [ $* \< 2.6 ]), 0) # Only install epoll with Python < 2.6, see setup.py for details.
 	dh_movefiles -ppython-twisted-bin \
 	  --sourcedir=debian/python-twisted-core \
 	    usr/lib/python$*/$(call sitedir,$*)/twisted/internet/_sigchld.so \
 	    usr/lib/python$*/$(call sitedir,$*)/twisted/python/_epoll.so \
 	    usr/lib/python$*/$(call sitedir,$*)/twisted/python/_initgroups.so \
 	    usr/lib/python$*/$(call sitedir,$*)/twisted/test/raiser.so
+endif
 else
 	dh_movefiles -ppython-twisted-bin \
 	  --sourcedir=debian/python-twisted-core \

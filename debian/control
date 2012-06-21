@@ -63,7 +63,7 @@ Description: Official documentation of Twisted
 Package: python-twisted
 Architecture: all
 Priority: extra
-Depends: ${python:Depends}, python-twisted-core (>= 12.0), python-twisted-conch (>= 1:12.0), python-twisted-mail (>= 12.0), python-twisted-lore (>= 12.0), python-twisted-names (>= 12.0), python-twisted-news (>= 12.0), python-twisted-runner (>= 12.0), python-twisted-web (>= 12.0), python-twisted-words (>= 12.0), ${misc:Depends}
+Depends: ${python:Depends}, python-twisted-core (>= 12.1), python-twisted-conch (>= 1:12.1), python-twisted-mail (>= 12.1), python-twisted-lore (>= 12.1), python-twisted-names (>= 12.1), python-twisted-news (>= 12.1), python-twisted-runner (>= 12.1), python-twisted-web (>= 12.1), python-twisted-words (>= 12.1), ${misc:Depends}
 Provides: ${python:Provides}
 Description: Event-based framework for internet applications (dependency package)
  This is a dependency package that depends on the twisted core library and
