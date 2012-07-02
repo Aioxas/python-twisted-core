@@ -17,7 +17,7 @@
     code can be reused for SSL and Unix socket servers). There is
     a <a href="udp.html" shape="rect">separate document</a> covering UDP.</p>
 
-    <p>Your protocol handling class will usually subclass <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">twisted.internet.protocol.Protocol</a></code>. Most
+    <p>Your protocol handling class will usually subclass <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">twisted.internet.protocol.Protocol</a></code>. Most
     protocol handlers inherit either from this class or from one of
     its convenience children. An instance of the protocol class
     is instantiated per-connection, on demand, and will go
@@ -27,7 +27,7 @@
 
     <p>The persistent configuration is kept in a <code>Factory</code>
     class, which usually inherits
-    from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">twisted.internet.protocol.Factory</a></code>. The <code>buildProtocol</code>
+    from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">twisted.internet.protocol.Factory</a></code>. The <code>buildProtocol</code>
     method of the <code>Factory</code> is used to create
     a <code>Protocol</code> for each new connection.</p>
 
@@ -37,7 +37,7 @@
     fact does not know anything about the
     network. See <a href="endpoints.html" shape="rect">the endpoints
     documentation</a> for more information,
-    or <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">twisted.internet.interfaces.IReactorTCP.listenTCP</a></code>,
+    or <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">twisted.internet.interfaces.IReactorTCP.listenTCP</a></code>,
     and the other <code>IReactor*.listen*</code> APIs for the lower
     level APIs that endpoints are based on.</p>
 
@@ -516,7 +516,7 @@
 </pre><div class="caption">Source listing - <a href="listings/servers/chat.py"><span class="filename">listings/servers/chat.py</span></a></div></div>
 
     <p>The only API you might not be familiar with
-    is <code>listenTCP</code>. <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">listenTCP</a></code> is
+    is <code>listenTCP</code>. <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">listenTCP</a></code> is
     the method which connects a <code>Factory</code> to the network.
     This is the lower-level API
     that <a href="endpoints.html" shape="rect">endpoints</a> wraps for you.</p>
@@ -543,6 +543,6 @@ Welcome, bob!
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

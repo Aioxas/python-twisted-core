@@ -14,7 +14,7 @@
 
     <p>Try to choose names which are both easy to remember and
     meaningful. Some silliness is OK at the module naming level
-    (see <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.html" title="twisted.spread">twisted.spread</a></code>...) but when
+    (see <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.html" title="twisted.spread">twisted.spread</a></code>...) but when
     choosing class names, be as precise as possible.</p>
 
     <p>Try to avoid overloaded terms. This rule is often broken,
@@ -64,7 +64,7 @@
      example of what you should write).  The names of test modules should
      begin with <code>test_</code> so that they are automatically discoverable by
      test runners such as Trial.  Twisted's unit tests are written using
-     <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.trial.html" title="twisted.trial">twisted.trial</a></code>, an xUnit library which has been
+     <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.trial.html" title="twisted.trial">twisted.trial</a></code>, an xUnit library which has been
      extensively customized for use in testing Twisted and Twisted-based
      libraries.</p>
 
@@ -398,7 +398,7 @@ Docstring goes here.
     to run from the command-line, the following things must be done:</p>
 
     <ol>
-      <li>Write a module in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.scripts.html" title="twisted.scripts">twisted.scripts</a></code>
+      <li>Write a module in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.scripts.html" title="twisted.scripts">twisted.scripts</a></code>
       which contains a callable global named <code>run</code>. This
       will be called by the command line part with no arguments (it
       will usually read <code>sys.argv</code>). Feel free to write more
@@ -507,7 +507,7 @@ Docstring goes here.
     in favor of the <code>set</code> and <code>frozenset</code> builtins. When
     you need to use sets or frozensets in your code, please use
     the <code>set</code> and <code>frozenset</code> provided
-    by <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.compat.html" title="twisted.python.compat">twisted.python.compat</a></code>. There are some
+    by <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.compat.html" title="twisted.python.compat">twisted.python.compat</a></code>. There are some
     differences between <code>sets.Set</code> and <code>set</code>, that are
     explained in the <a href="http://www.python.org/dev/peps/pep-0218/" shape="rect">set
     PEP</a>. Please be sure to not rely on the behavior of one or the other
@@ -586,8 +586,8 @@ Docstring goes here.
     <h2>Callback Arguments<a name="auto18"/></h2>
 
     <p>There are several methods whose purpose is to help the user set up
-    callback functions, for example <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.addCallback.html" title="twisted.internet.defer.Deferred.addCallback">Deferred.addCallback</a></code> or the
-    reactor's <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.base.ReactorBase.callLater.html" title="twisted.internet.base.ReactorBase.callLater">callLater</a></code> method. To make
+    callback functions, for example <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.addCallback.html" title="twisted.internet.defer.Deferred.addCallback">Deferred.addCallback</a></code> or the
+    reactor's <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.base.ReactorBase.callLater.html" title="twisted.internet.base.ReactorBase.callLater">callLater</a></code> method. To make
     access to the callback as transparent as possible, most of these methods
     use <code class="python">**kwargs</code> to capture arbitrary arguments
     that are destined for the user's callback. This allows the call to the
@@ -596,7 +596,7 @@ Docstring goes here.
 
     <p>In these methods, take care to not have other argument names that will
     <q>steal</q> the user's callback's arguments. When sensible, prefix these
-    <q>internal</q> argument names with an underscore. For example, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">RemoteReference.callRemote</a></code> is
+    <q>internal</q> argument names with an underscore. For example, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">RemoteReference.callRemote</a></code> is
     meant to be called like this:</p>
 
 <pre class="python"><p class="py-linenumber">1
@@ -813,6 +813,6 @@ global-ignores = dropin.cache *.pyc *.pyo *.o *.lo *.la #*# .*.rej *.rej .*~
   </div>
 
     <p><a href="../../howto/index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

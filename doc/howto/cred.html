@@ -31,11 +31,11 @@ or where mail is stored.  </p>
 <p>To sketch out how this works - a <q>Realm</q> corresponds to an application
 domain and is in charge of avatars, which are network-accessible business logic
 objects.  To connect this to an authentication database, a top-level object
-called a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code> stores a
+called a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code> stores a
 realm, and a number of credential checkers.  Something that wishes to log in,
-such as a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code>,
+such as a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code>,
 stores a reference to the portal. Login consists of passing credentials and a
-request interface (e.g. POP3's <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.mail.pop3.IMailbox.html" title="twisted.mail.pop3.IMailbox">IMailbox</a></code>) to the portal. The portal passes
+request interface (e.g. POP3's <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.mail.pop3.IMailbox.html" title="twisted.mail.pop3.IMailbox">IMailbox</a></code>) to the portal. The portal passes
 the credentials to the appropriate credential checker, which returns an avatar
 ID. The ID is passed to the realm, which returns the appropriate avatar.  For a
 Portal that has a realm that creates mailbox objects and a credential checker
@@ -55,7 +55,7 @@ processed:</p>
 <p>This is the the core of login, the point of integration between all the objects
 in the cred system.  There is one
 concrete implementation of Portal, and no interface - it does a very
-simple task.  A <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code>
+simple task.  A <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code>
 associates one (1) Realm with a collection of
 CredentialChecker instances.  (More on those later.)</p>
 
@@ -64,9 +64,9 @@ something, you will need a reference to a Portal, and to nothing else.
 This has only 2 methods -</p>
 
 <ul>
-<li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.Portal.login.html" title="twisted.cred.portal.Portal.login">login</a></code><code>(credentials, mind, *interfaces)</code>
+<li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.Portal.login.html" title="twisted.cred.portal.Portal.login">login</a></code><code>(credentials, mind, *interfaces)</code>
 
-<p>The docstring is quite expansive (see <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.html" title="twisted.cred.portal">twisted.cred.portal</a></code>), but in
+<p>The docstring is quite expansive (see <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.html" title="twisted.cred.portal">twisted.cred.portal</a></code>), but in
 brief, this is what you call when you need to call in order to connect
 a user to the system.  Typically you only pass in one interface, and the mind
 is <code class="python">None</code>. The interfaces are the possible interfaces the returned
@@ -82,7 +82,7 @@ established by this call to login</li>
 <p>The logout method has to be called when the avatar is logged out. For POP3 this means
 when the protocol is disconnected or logged out, etc..</p>
 </li>
-<li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.Portal.registerChecker.html" title="twisted.cred.portal.Portal.registerChecker">registerChecker</a></code><code>(checker, *credentialInterfaces)</code>
+<li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.Portal.registerChecker.html" title="twisted.cred.portal.Portal.registerChecker">registerChecker</a></code><code>(checker, *credentialInterfaces)</code>
 
 <p>which adds a CredentialChecker to the portal. The optional list of interfaces are interfaces of credentials
 that the checker is able to check.</p>
@@ -90,7 +90,7 @@ that the checker is able to check.</p>
 
     <h3>The CredentialChecker<a name="auto3"/></h3>
 
-<p>This is an object implementing <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.checkers.ICredentialsChecker.html" title="twisted.cred.checkers.ICredentialsChecker">ICredentialsChecker</a></code> which resolves some
+<p>This is an object implementing <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.checkers.ICredentialsChecker.html" title="twisted.cred.checkers.ICredentialsChecker">ICredentialsChecker</a></code> which resolves some
 credentials to an avatar ID.
 
 Whether the credentials are stored in an in-memory data structure, an
@@ -122,18 +122,18 @@ challenge/response server is an active state-machine that will require
 several method calls in order to determine a result.</p>
 
 <p>Twisted comes with a number of credentials interfaces and implementations
-in the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.credentials.html" title="twisted.cred.credentials">twisted.cred.credentials</a></code> module,
-such as <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.credentials.IUsernamePassword.html" title="twisted.cred.credentials.IUsernamePassword">IUsernamePassword</a></code>
-and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.credentials.IUsernameHashedPassword.html" title="twisted.cred.credentials.IUsernameHashedPassword">IUsernameHashedPassword</a></code>.</p>
+in the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.credentials.html" title="twisted.cred.credentials">twisted.cred.credentials</a></code> module,
+such as <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.credentials.IUsernamePassword.html" title="twisted.cred.credentials.IUsernamePassword">IUsernamePassword</a></code>
+and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.credentials.IUsernameHashedPassword.html" title="twisted.cred.credentials.IUsernameHashedPassword">IUsernameHashedPassword</a></code>.</p>
 
     <h3>The Realm<a name="auto5"/></h3>
 <p>A realm is an interface which connects your universe of <q>business
 objects</q> to the authentication system.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.IRealm.html" title="twisted.cred.portal.IRealm">IRealm</a></code> is another one-method interface:</p>
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.IRealm.html" title="twisted.cred.portal.IRealm">IRealm</a></code> is another one-method interface:</p>
 
 <ul>
-<li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.IRealm.requestAvatar.html" title="twisted.cred.portal.IRealm.requestAvatar">requestAvatar</a></code><code>(avatarId, mind, *interfaces)</code>
+<li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.IRealm.requestAvatar.html" title="twisted.cred.portal.IRealm.requestAvatar">requestAvatar</a></code><code>(avatarId, mind, *interfaces)</code>
 
 <p>This method will typically be called from 'Portal.login'.  The avatarId
 is the one returned by a CredentialChecker.</p>
@@ -432,7 +432,7 @@ plugins for your application, please refer to the <a href="tap.html" shape="rect
 <p> To build a plugin for cred, you should first define an <code class="python">authType</code>, a short one-word string that defines
 your plugin to the command-line. Once you have this, the convention is
 to create a file named <code>myapp_plugins.py</code> in the 
-<code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugins.html" title="twisted.plugins">twisted.plugins</a></code> module path. </p>
+<code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugins.html" title="twisted.plugins">twisted.plugins</a></code> module path. </p>
 
 <p> Below is an example file structure for an application that defines
 such a plugin: </p>
@@ -464,7 +464,7 @@ such a plugin: </p>
 <p>
 Once you have created this structure within your application, you can
 create the code for your cred plugin by building a factory class which
-implements <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.strcred.ICheckerFactory.html" title="twisted.cred.strcred.ICheckerFactory">ICheckerFactory</a></code>.
+implements <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.strcred.ICheckerFactory.html" title="twisted.cred.strcred.ICheckerFactory">ICheckerFactory</a></code>.
 These factory classes should not consist of a tremendous amount of
 code. Most of the real application logic should reside in the cred
 checker itself. (For help on building those, scroll up.)
@@ -561,6 +561,6 @@ application (and by other application developers), please see the <a href="tap.h
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

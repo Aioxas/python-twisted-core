@@ -32,21 +32,21 @@
     key file name, and certificate file name.</p>
 
     <p>Instead of using listenTCP and connectTCP to create a connection, use
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorSSL.listenSSL.html" title="twisted.internet.interfaces.IReactorSSL.listenSSL">listenSSL</a></code> and
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorSSL.connectSSL.html" title="twisted.internet.interfaces.IReactorSSL.connectSSL">connectSSL</a></code> for a
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorSSL.listenSSL.html" title="twisted.internet.interfaces.IReactorSSL.listenSSL">listenSSL</a></code> and
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorSSL.connectSSL.html" title="twisted.internet.interfaces.IReactorSSL.connectSSL">connectSSL</a></code> for a
     server and client respectively. These methods take a contextFactory as an
     additional argument.</p>
 
     <p>The basic server context factory is
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.ssl.ContextFactory.html" title="twisted.internet.ssl.ContextFactory">twisted.internet.ssl.ContextFactory</a></code>, and the basic
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.ssl.ContextFactory.html" title="twisted.internet.ssl.ContextFactory">twisted.internet.ssl.ContextFactory</a></code>, and the basic
     client context factory is
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.ssl.ClientContextFactory.html" title="twisted.internet.ssl.ClientContextFactory">twisted.internet.ssl.ClientContextFactory</a></code>. They can
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.ssl.ClientContextFactory.html" title="twisted.internet.ssl.ClientContextFactory">twisted.internet.ssl.ClientContextFactory</a></code>. They can
     be used as-is or subclassed.
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.ssl.DefaultOpenSSLContextFactory.html" title="twisted.internet.ssl.DefaultOpenSSLContextFactory">twisted.internet.ssl.DefaultOpenSSLContextFactory</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.ssl.DefaultOpenSSLContextFactory.html" title="twisted.internet.ssl.DefaultOpenSSLContextFactory">twisted.internet.ssl.DefaultOpenSSLContextFactory</a></code>
     is a convenience server class that subclasses <code>ContextFactory</code>
     and adds default parameters to the SSL handshake and connection. Another
     useful class is
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.ssl.CertificateOptions.html" title="twisted.internet.ssl.CertificateOptions">twisted.internet.ssl.CertificateOptions</a></code>; it is a
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.ssl.CertificateOptions.html" title="twisted.internet.ssl.CertificateOptions">twisted.internet.ssl.CertificateOptions</a></code>; it is a
     factory for SSL context objects that lets you specify many of the common
     verification and session options so it can do the proper pyOpenSSL
     initialization for you.</p>
@@ -168,12 +168,12 @@
     is explicitly disallowed in both <code>DefaultOpenSSLContextFactory</code> and
     <code>ClientContextFactory</code> for being insecure by calling
     <code>set_options(SSL.OP_NO_SSLv2)</code> on their contexts. See
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.ssl.html" title="twisted.internet.ssl">twisted.internet.ssl</a></code> for additional comments.</p>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.ssl.html" title="twisted.internet.ssl">twisted.internet.ssl</a></code> for additional comments.</p>
 
     <h2>Using startTLS<a name="auto4"/></h2>
 
     <p>If you want to switch from unencrypted to encrypted traffic
-    mid-connection, you'll need to turn on SSL with <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.ITLSTransport.startTLS.html" title="twisted.internet.interfaces.ITLSTransport.startTLS">startTLS</a></code> on both
+    mid-connection, you'll need to turn on SSL with <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.ITLSTransport.startTLS.html" title="twisted.internet.interfaces.ITLSTransport.startTLS">startTLS</a></code> on both
     ends of the connection at the same time via some agreed-upon signal like the
     reception of a particular message. You can readily verify the switch to an
     encrypted channel by examining the packet payloads with a tool like
@@ -526,10 +526,10 @@
 
     <h2>Other facilities<a name="auto10"/></h2>
 
-    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.protocols.amp.html" title="twisted.protocols.amp">twisted.protocols.amp</a></code> supports encrypted
+    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.protocols.amp.html" title="twisted.protocols.amp">twisted.protocols.amp</a></code> supports encrypted
     connections and exposes a <code>startTLS</code> method one can use or
-    subclass. <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.web.html" title="twisted.web">twisted.web</a></code> has built-in SSL support in
-    its <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.web.client.html" title="twisted.web.client">client</a></code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.web.http.html" title="twisted.web.http">http</a></code>, and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.web.xmlrpc.html" title="twisted.web.xmlrpc">xmlrpc</a></code> modules.</p>
+    subclass. <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.web.html" title="twisted.web">twisted.web</a></code> has built-in SSL support in
+    its <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.web.client.html" title="twisted.web.client">client</a></code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.web.http.html" title="twisted.web.http">http</a></code>, and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.web.xmlrpc.html" title="twisted.web.xmlrpc">xmlrpc</a></code> modules.</p>
 
     <h2>Conclusion<a name="auto11"/></h2>
 
@@ -545,6 +545,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

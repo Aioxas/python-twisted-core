@@ -16,12 +16,12 @@
     <p>There is frequently a need for programs to parse a UNIX-like
     command line program: options preceded by <code>-</code> or
     <code>--</code>, sometimes followed by a parameter, followed by
-    a list of arguments. The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.html" title="twisted.python.usage">twisted.python.usage</a></code> provides a class,
+    a list of arguments. The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.html" title="twisted.python.usage">twisted.python.usage</a></code> provides a class,
     <code>Options</code>, to facilitate such parsing.</p>
 
     <p>While Python has the <code>getopt</code> module for doing
     this, it provides a very low level of abstraction for options.
-    Twisted has a higher level of abstraction, in the class <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">twisted.python.usage.Options</a></code>. It uses
+    Twisted has a higher level of abstraction, in the class <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">twisted.python.usage.Options</a></code>. It uses
     Python's reflection facilities to provide an easy to use yet
     flexible interface to the command line. While most command line
     processors either force the application writer to write her own
@@ -32,7 +32,7 @@
     programmer to decide how much control she wants.</p>
 
     <p>The <code>Options</code> class is used by subclassing. Since
-    a lot of time it will be used in the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.tap.html" title="twisted.tap">twisted.tap</a></code> package, where the local
+    a lot of time it will be used in the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.tap.html" title="twisted.tap">twisted.tap</a></code> package, where the local
     conventions require the specific options parsing class to also
     be called <code>Options</code>, it is usually imported with</p>
 <pre class="python"><p class="py-linenumber">1
@@ -363,7 +363,7 @@
     verbosity to -3.
     </p>
 
-    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">usage.Options</a></code>
+    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">usage.Options</a></code>
     class knows that these are
     parameter-less options, since the methods do not receive an
     argument. Here is an example for a method with a parameter:</p>
@@ -566,16 +566,16 @@ Options:
     <p>Optionally, a special attribute, <code>compData</code>, may be defined
     on your <code>Options</code> subclass in order to provide more information
     to the shell-completion system. The attribute should be an instance of
-    <a class="API" shape="rect"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.Completions.html" title="twisted.python.usage.Completions">Completions</a></a>. See that class
+    <a class="API" shape="rect"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.Completions.html" title="twisted.python.usage.Completions">Completions</a></a>. See that class
     for further details.</p>
 
     <p>In addition, <code>compData</code> may be defined on parent classes in
     your inheritance hiearchy. The information from each
-    <a class="API" shape="rect"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.Completions.html" title="twisted.python.usage.Completions">Completions</a></a> instance will be
+    <a class="API" shape="rect"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.Completions.html" title="twisted.python.usage.Completions">Completions</a></a> instance will be
     aggregated when producing the final tab-completion results.</p>
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

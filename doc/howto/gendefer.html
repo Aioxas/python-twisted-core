@@ -11,7 +11,7 @@
 
 <span/>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> objects are
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> objects are
 signals that a function you have called does not yet have the data you want
 available. When a function returns a Deferred object, your calling function
 attaches callbacks to it to handle the data when available.</p>
@@ -45,7 +45,7 @@ the Deferred is returned to at <a href="defer.html#class" shape="rect">Using Def
   
   <p>Run success callbacks with the given result. <em>This
   can only be run once.</em> Later calls to this or
-  <code>errback</code> will raise <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.AlreadyCalledError.html" title="twisted.internet.defer.AlreadyCalledError">twisted.internet.defer.AlreadyCalledError</a></code>.
+  <code>errback</code> will raise <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.AlreadyCalledError.html" title="twisted.internet.defer.AlreadyCalledError">twisted.internet.defer.AlreadyCalledError</a></code>.
   If further callbacks or errbacks are added after this
   point, addCallbacks will run the callbacks immediately.</p>
   </li>
@@ -55,7 +55,7 @@ the Deferred is returned to at <a href="defer.html#class" shape="rect">Using Def
   
   <p>Run error callbacks with the given failure. <em>This can
   only be run once.</em> Later calls to this or
-  <code>callback</code> will raise <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.AlreadyCalledError.html" title="twisted.internet.defer.AlreadyCalledError">twisted.internet.defer.AlreadyCalledError</a></code>.
+  <code>callback</code> will raise <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.AlreadyCalledError.html" title="twisted.internet.defer.AlreadyCalledError">twisted.internet.defer.AlreadyCalledError</a></code>.
   If further callbacks or errbacks are added after this
   point, addCallbacks will run the callbacks immediately.</p>
   </li>
@@ -229,8 +229,8 @@ following example of a synchronous function:</p>
 </pre><div class="caption">Source listing - <a href="listings/deferred/synch-validation.py"><span class="filename">listings/deferred/synch-validation.py</span></a></div></div>
 
 <p>While we can require that callers of our function wrap our synchronous
-result in a Deferred using <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.maybeDeferred.html" title="twisted.internet.defer.maybeDeferred">maybeDeferred</a></code>, for the sake of API
-compatibility it is better to return a Deferred ourselves using  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.succeed.html" title="twisted.internet.defer.succeed">defer.succeed</a></code>:</p>
+result in a Deferred using <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.maybeDeferred.html" title="twisted.internet.defer.maybeDeferred">maybeDeferred</a></code>, for the sake of API
+compatibility it is better to return a Deferred ourselves using  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.succeed.html" title="twisted.internet.defer.succeed">defer.succeed</a></code>:</p>
 
 <pre class="python"><p class="py-linenumber"> 1
  2
@@ -258,7 +258,7 @@ compatibility it is better to return a Deferred ourselves using  <code class="AP
     <span class="py-src-keyword">return</span> <span class="py-src-variable">defer</span>.<span class="py-src-variable">succeed</span>(<span class="py-src-variable">result</span>)
 </pre>
 
-<p>There is an equivalent <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.fail.html" title="twisted.internet.defer.fail">defer.fail</a></code> method to return a Deferred with the
+<p>There is an equivalent <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.fail.html" title="twisted.internet.defer.fail">defer.fail</a></code> method to return a Deferred with the
 errback chain already fired.</p>
 
 <h2>Integrating blocking code with Twisted<a name="auto5"/></h2>
@@ -271,7 +271,7 @@ asynchronous, but there is no way to make third party functions asynchronous
 other than rewriting them.</p>
 
 <p>In this case, Twisted provides the ability to run the blocking code in a
-separate thread rather than letting it block your application. The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.threads.deferToThread.html" title="twisted.internet.threads.deferToThread">twisted.internet.threads.deferToThread</a></code> function will set up
+separate thread rather than letting it block your application. The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.threads.deferToThread.html" title="twisted.internet.threads.deferToThread">twisted.internet.threads.deferToThread</a></code> function will set up
 a thread to run your blocking function, return a Deferred and later fire that
 Deferred when the thread completes.</p>
 
@@ -406,6 +406,6 @@ this would negate its usefulness!</p>
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

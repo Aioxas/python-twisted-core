@@ -12,11 +12,11 @@
 
     <h2>Basic usage<a name="auto0"/></h2>
 
-    <p>Twisted provides a simple and flexible logging system in the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.html" title="twisted.python.log">twisted.python.log</a></code> module.  It has three commonly used
+    <p>Twisted provides a simple and flexible logging system in the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.html" title="twisted.python.log">twisted.python.log</a></code> module.  It has three commonly used
     functions:</p>
 
     <dl>
-      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.LogPublisher.msg.html" title="twisted.python.log.LogPublisher.msg">msg</a></code></dt>
+      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.LogPublisher.msg.html" title="twisted.python.log.LogPublisher.msg">msg</a></code></dt>
       <dd>Logs a new message.  For example:
         <pre class="python"><p class="py-linenumber">1
 2
@@ -25,9 +25,9 @@
 </pre>
       </dd>
 
-      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.err.html" title="twisted.python.log.err">err</a></code></dt>
+      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.err.html" title="twisted.python.log.err">err</a></code></dt>
       <dd>Writes a failure to the log, including traceback information (if any).
-      You can pass it a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> or Exception instance, or
+      You can pass it a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> or Exception instance, or
       nothing.  If you pass something else, it will be converted to a string
       with <code>repr</code> and logged.
 
@@ -44,7 +44,7 @@
 </pre>
       </dd>
 
-      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">startLogging</a></code></dt>
+      <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">startLogging</a></code></dt>
       <dd>Starts logging to a given file-like object.  For example:
         <pre class="python"><p class="py-linenumber">1
 </p><span class="py-src-variable">log</span>.<span class="py-src-variable">startLogging</span>(<span class="py-src-variable">open</span>(<span class="py-src-string">'/var/log/foo.log'</span>, <span class="py-src-string">'w'</span>))
@@ -82,9 +82,9 @@
 
     <h3>Log files<a name="auto2"/></h3>
 
-    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.logfile.html" title="twisted.python.logfile">twisted.python.logfile</a></code> module provides
+    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.logfile.html" title="twisted.python.logfile">twisted.python.logfile</a></code> module provides
     some standard classes suitable for use with <code>startLogging</code>, such
-    as <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.logfile.DailyLogFile.html" title="twisted.python.logfile.DailyLogFile">DailyLogFile</a></code>,
+    as <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.logfile.DailyLogFile.html" title="twisted.python.logfile.DailyLogFile">DailyLogFile</a></code>,
     which will rotate the log to a new file once per day.</p>
 
     <h3>Using the standard library logging module<a name="auto3"/></h3>
@@ -93,7 +93,7 @@
     Python <a href="http://docs.python.org/library/logging.html" shape="rect">standard
     library logging module</a> or you want to use its easy configuration but
     don't want to lose twisted-produced messages, the observer
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.PythonLoggingObserver.html" title="twisted.python.log.PythonLoggingObserver">PythonLoggingObserver</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.PythonLoggingObserver.html" title="twisted.python.log.PythonLoggingObserver">PythonLoggingObserver</a></code>
     should be useful to you.
     </p>
 
@@ -132,7 +132,7 @@
     registered.  There can be any number of observers, and each can treat
     the event in any way desired.
     An example of
-    a log observer in Twisted is the <code>emit</code> method of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.FileLogObserver.html" title="twisted.python.log.FileLogObserver">FileLogObserver</a></code>.
+    a log observer in Twisted is the <code>emit</code> method of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.FileLogObserver.html" title="twisted.python.log.FileLogObserver">FileLogObserver</a></code>.
     <code>FileLogObserver</code>, used by
     <code>startLogging</code>, writes events to a log file.  A log observer
     is just a callable that accepts a dictionary as its only argument.  You can
@@ -191,6 +191,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

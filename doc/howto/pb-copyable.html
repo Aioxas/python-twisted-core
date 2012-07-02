@@ -14,17 +14,17 @@
 
 <p>This chapter focuses on how to use PB to pass complex types (specifically
 class instances) to and from a remote process. The first section is on
-simply copying the contents of an object to a remote process (<code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>). The second covers how
-to copy those contents once, then update them later when they change (<code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code>).</p>
+simply copying the contents of an object to a remote process (<code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>). The second covers how
+to copy those contents once, then update them later when they change (<code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code>).</p>
 
 <h2>Motivation<a name="auto1"/></h2>
 
 <p>From the <a href="pb-usage.html" shape="rect">previous chapter</a>, you've seen how to
 pass basic types to a remote process, by using them in the arguments or
-return values of a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">callRemote</a></code> function. However,
+return values of a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">callRemote</a></code> function. However,
 if you've experimented with it, you may have discovered problems when trying
 to pass anything more complicated than a primitive int/list/dict/string
-type, or another <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code> object. At some point you want
+type, or another <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code> object. At some point you want
 to pass entire objects between processes, instead of having to reduce them
 down to dictionaries on one end and then re-instantiating them on the
 other.</p>
@@ -52,7 +52,7 @@ code doesn't work, as will be explained below.</p>
 <p>If you try to run this, you might hope that a suitable remote end which
 implements the <code>remote_sendPond</code> method would see that method get
 invoked with an instance from the <code>LilyPond</code> class. But instead,
-you'll encounter the dreaded <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code> exception. This is
+you'll encounter the dreaded <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code> exception. This is
 Twisted's way of telling you that you've violated a security restriction,
 and that the receiving end refuses to accept your object.</p>
 
@@ -117,7 +117,7 @@ contents of the object.</p>
 
 
 <p>PB lets you specify the mapping from remote class names to local classes
-with the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.setUnjellyableForClass.html" title="twisted.spread.jelly.setUnjellyableForClass">setUnjellyableForClass</a></code> function 
+with the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.setUnjellyableForClass.html" title="twisted.spread.jelly.setUnjellyableForClass">setUnjellyableForClass</a></code> function 
 <a href="#footnote-1" title="Note that, in this context, unjelly is a verb with the opposite meaning of jelly. The verb to jelly means to serialize an object or data structure into a sequence of bytes (or other primitive transmittable/storable representation), while to unjelly means to unserialize the bytestream into a live object in the receiver's memory space. Unjellyable is a noun, (not an adjective), referring to the the class that serves as a destination or recipient of the unjellying process. A is unjellyable into B means that a serialized representation A (of some remote object) can be unserialized into a local object of type B. It is these objects B that are the Unjellyable second argument of the setUnjellyableForClass function. In particular, unjellyable does not mean cannot be jellied. Unpersistable means not persistable, but unjelly, unserialize, and unpickle mean to reverse the operations of jellying, serializing, and pickling."><super>1</super></a>.
 
 
@@ -352,8 +352,8 @@ http://twistedmatrix.com/documents/current/howto/application for details.
 <p>The sending side has a class called <code>LilyPond</code>. To make this
 eligble for transport through <code>callRemote</code> (either as an
 argument, a return value, or something referenced by either of those [like a
-dictionary value]), it must inherit from one of the four <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Serializable.html" title="twisted.spread.pb.Serializable">Serializable</a></code> classes. In this section,
-we focus on <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">Copyable</a></code>.
+dictionary value]), it must inherit from one of the four <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Serializable.html" title="twisted.spread.pb.Serializable">Serializable</a></code> classes. In this section,
+we focus on <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">Copyable</a></code>.
 The copyable subclass of <code>LilyPond</code> is called 
  <code>CopyPond</code>. We create an instance of it and send it through 
  <code>callRemote</code> as an argument to the receiver's 
@@ -362,8 +362,8 @@ The copyable subclass of <code>LilyPond</code> is called
 <q>copy_sender.CopyPond</q> and some chunk of data that represents the
 object's state. <code>pond.__class__.__module__</code> and 
  <code>pond.__class__.__name__</code> are used to derive the class name
-string. The object's <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.Copyable.getStateToCopy.html" title="twisted.spread.flavors.Copyable.getStateToCopy">getStateToCopy</a></code> method is
-used to get the state: this is provided by <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, and the default just retrieves 
+string. The object's <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.Copyable.getStateToCopy.html" title="twisted.spread.flavors.Copyable.getStateToCopy">getStateToCopy</a></code> method is
+used to get the state: this is provided by <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, and the default just retrieves 
  <code>self.__dict__</code>. This works just like the optional 
  <code>__getstate__</code> method used by <code>pickle</code>. The pair of
 name and state are sent over the wire to the receiver.</p>
@@ -374,7 +374,7 @@ from the sender's <code>LilyPond</code> class (with a fully-qualified name
 of <code>copy_sender.LilyPond</code>), which specifies how we expect it to
 behave. We trust that this is the same <code>LilyPond</code> class as the
 sender used. (At the very least, we hope ours will be able to accept a state
-created by theirs). It also inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code>, which is a requirement for all
+created by theirs). It also inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code>, which is a requirement for all
 classes that act in this local-representative role (those which are given to
 the second argument of <code>setUnjellyableForClass</code>). 
  <code>RemoteCopy</code> provides the methods that tell the Jelly layer how
@@ -389,7 +389,7 @@ is transmitted when the sender serializes the remote object.</p>
 <p>When the receiver unserializes (<q>unjellies</q>) the object, it will
 create an instance of the local <code>ReceiverPond</code> class, and hand
 the transmitted state (usually in the form of a dictionary) to that object's 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.RemoteCopy.setCopyableState.html" title="twisted.spread.flavors.RemoteCopy.setCopyableState">setCopyableState</a></code> method.
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.RemoteCopy.setCopyableState.html" title="twisted.spread.flavors.RemoteCopy.setCopyableState">setCopyableState</a></code> method.
 This acts just like the <code>__setstate__</code> method that 
  <code>pickle</code> uses when unserializing an object. 
  <code>getStateToCopy</code>/<code>setCopyableState</code> are distinct from 
@@ -686,8 +686,8 @@ Main loop terminated.
   defined together, with the <code>setUnjellyableForClass</code> immediately
   following them.</li>
 
-  <li>The class that is sent must inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>. The class that is registered to
-  receive it must inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code><a href="#footnote-2" title="pb.RemoteCopy is actually defined in twisted.spread.flavors, but pb.RemoteCopy is the preferred way to access it"><super>2</super></a>. </li>
+  <li>The class that is sent must inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>. The class that is registered to
+  receive it must inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code><a href="#footnote-2" title="pb.RemoteCopy is actually defined in twisted.spread.flavors, but pb.RemoteCopy is the preferred way to access it"><super>2</super></a>. </li>
 
   <li>The same class can be used to send and receive. Just have it inherit
   from both <code>pb.Copyable</code> and <code>pb.RemoteCopy</code>. This
@@ -696,16 +696,16 @@ Main loop terminated.
   using <code>setCopyableState</code>) versus when it is going (using
   <code>getStateToCopy</code>).</li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
   exceptions are raised by the receiving end. They will be delivered
   asynchronously to an <code>errback</code> handler. If you do not add one
   to the <code>Deferred</code> returned by <code>callRemote</code>, then you
   will never receive notification of the problem. </li>
 
-  <li>The class that is derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code> will be created using a
+  <li>The class that is derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code> will be created using a
   constructor <code>__init__</code> method that takes no arguments. All
   setup must be performed in the <code>setCopyableState</code> method. As
-  the docstring on <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">RemoteCopy</a></code> says, don't implement a
+  the docstring on <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">RemoteCopy</a></code> says, don't implement a
   constructor that requires arguments in a subclass of
   <code>RemoteCopy</code>.</li>
 
@@ -723,11 +723,11 @@ Main loop terminated.
   in <code>twisted.spread.flavors</code>, and the docstrings there are
   the best source of additional information.</li>
 
-  <li><code>Copyable</code> is also used in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.web.distrib.html" title="twisted.web.distrib">twisted.web.distrib</a></code> to deliver HTTP requests to other
+  <li><code>Copyable</code> is also used in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.web.distrib.html" title="twisted.web.distrib">twisted.web.distrib</a></code> to deliver HTTP requests to other
   programs for rendering, allowing subtrees of URL space to be delegated to
   multiple programs (on multiple machines).</li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.manhole.explorer.html" title="twisted.manhole.explorer">twisted.manhole.explorer</a></code> also uses
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.manhole.explorer.html" title="twisted.manhole.explorer">twisted.manhole.explorer</a></code> also uses
   <code>Copyable</code> to distribute debugging information from the program
   under test to the debugging tool.</li>
 
@@ -741,15 +741,15 @@ slow. <q>big</q> means it takes a lot of data (storage, network bandwidth,
 processing) to represent its state. <q>slow</q> means that state doesn't
 change very frequently. It may be more efficient to send the full state only
 once, the first time it is needed, then afterwards only send the differences
-or changes in state whenever it is modified. The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code> class provides a framework to
+or changes in state whenever it is modified. The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code> class provides a framework to
 implement this.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code> is derived
-from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, so it is
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code> is derived
+from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, so it is
 based upon the idea of an object's state being captured on the sending side,
 and then turned into a new object on the receiving side. This is extended to
-have an object <q>publishing</q> on the sending side (derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code>), matched with one
-<q>observing</q> on the receiving side (derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">pb.RemoteCache</a></code>).</p>
+have an object <q>publishing</q> on the sending side (derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">pb.Cacheable</a></code>), matched with one
+<q>observing</q> on the receiving side (derived from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">pb.RemoteCache</a></code>).</p>
 
 <p>To effectively use <code>pb.Cacheable</code>, you need to isolate changes
 to your object into accessor functions (specifically <q>setter</q>
@@ -757,8 +757,8 @@ functions). Your object needs to get control <em>every</em> single time some
 attribute is changed<a href="#footnote-3" title="Of course you could be clever and add a hook to __setattr__, along with magical change-announcing subclasses of the usual builtin types, to detect changes that result from normal = set operations. The semi-magical property attributes that were introduced in Python 2.2 could be useful too. The result might be hard to maintain or extend, though."><super>3</super></a>.</p>
 
 <p>You derive your sender-side class from <code>pb.Cacheable</code>, and you
-add two methods: <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.Cacheable.getStateToCacheAndObserveFor.html" title="twisted.spread.flavors.Cacheable.getStateToCacheAndObserveFor">getStateToCacheAndObserveFor</a></code>
-and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.Cacheable.stoppedObserving.html" title="twisted.spread.flavors.Cacheable.stoppedObserving">stoppedObserving</a></code>. The first
+add two methods: <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.Cacheable.getStateToCacheAndObserveFor.html" title="twisted.spread.flavors.Cacheable.getStateToCacheAndObserveFor">getStateToCacheAndObserveFor</a></code>
+and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.Cacheable.stoppedObserving.html" title="twisted.spread.flavors.Cacheable.stoppedObserving">stoppedObserving</a></code>. The first
 is called when a remote caching reference is first created, and retrieves
 the data with which the cache is first filled. It also provides an
 object called the <q>observer</q> <a href="#footnote-4" title="This is actually a RemoteCacheObserver, but it isn't very useful to subclass or modify, so simply treat it as a little demon that sits in your pb.Cacheable class and helps you distribute change notifications. The only useful thing to do with it is to run its callRemote method, which acts just like a normal pb.Referenceable's method of the same name."><super>4</super></a> that points at that receiver-side cache. Every time the state of the object
@@ -766,7 +766,7 @@ is changed, you give a message to the observer, informing them of the
 change. The other method, <code>stoppedObserving</code>, is called when the
 remote cache goes away, so that you can stop sending updates.</p>
 
-<p>On the receiver end, you make your cache class inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">pb.RemoteCache</a></code>, and implement the 
+<p>On the receiver end, you make your cache class inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">pb.RemoteCache</a></code>, and implement the 
  <code>setCopyableState</code> as you would for a <code>pb.RemoteCopy</code>
 object. In addition, you must implement methods to receive the updates sent
 to the observer by the <code>pb.Cacheable</code>: these methods should have
@@ -793,7 +793,7 @@ reference goes away, the <code>pb.RemoteCache</code> object can be freed.
 Just before it dies, it tells the sender side it no longer cares about the
 original object. When <em>that</em> reference count goes to zero, the
 Observer goes away and the <code>pb.Cacheable</code> object can stop
-announcing every change that takes place. The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.Cacheable.stoppedObserving.html" title="twisted.spread.flavors.Cacheable.stoppedObserving">stoppedObserving</a></code> method is
+announcing every change that takes place. The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.Cacheable.stoppedObserving.html" title="twisted.spread.flavors.Cacheable.stoppedObserving">stoppedObserving</a></code> method is
 used to tell the <code>pb.Cacheable</code> that the Observer has gone
 away.</p>
 
@@ -1134,13 +1134,13 @@ Main loop terminated.
 
 <ul>
   <li>The best source for information comes from the docstrings
-  in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.html" title="twisted.spread.flavors">twisted.spread.flavors</a></code>,
+  in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.html" title="twisted.spread.flavors">twisted.spread.flavors</a></code>,
   where <code>pb.Cacheable</code> is implemented.</li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.manhole.explorer.html" title="twisted.manhole.explorer">twisted.manhole.explorer</a></code> uses
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.manhole.explorer.html" title="twisted.manhole.explorer">twisted.manhole.explorer</a></code> uses
   <code>Cacheable</code>, and does some fairly interesting things with it.</li>
 
-  <li>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.publish.html" title="twisted.spread.publish">spread.publish</a></code> module also
+  <li>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.publish.html" title="twisted.spread.publish">spread.publish</a></code> module also
   uses <code>Cacheable</code>, and might be a source of further
   information.</li>
 </ul>
@@ -1160,26 +1160,26 @@ unserialized into a local object of type B. It is these objects <q>B</q>
 that are the <q>Unjellyable</q> second argument of the 
 <code>setUnjellyableForClass</code> function.
 In particular, <q>unjellyable</q> does <em>not</em> mean <q>cannot be
-jellied</q>. <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.Unpersistable.html" title="twisted.spread.jelly.Unpersistable">Unpersistable</a></code> means <q>not
+jellied</q>. <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.Unpersistable.html" title="twisted.spread.jelly.Unpersistable">Unpersistable</a></code> means <q>not
 persistable</q>, but <q>unjelly</q>, <q>unserialize</q>, and <q>unpickle</q>
 mean to reverse the operations of <q>jellying</q>, <q>serializing</q>, and
-<q>pickling</q>.</span></a></li><li><a name="footnote-2"><span class="footnote"><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code> is actually defined
-  in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.flavors.html" title="twisted.spread.flavors">twisted.spread.flavors</a></code>, but
+<q>pickling</q>.</span></a></li><li><a name="footnote-2"><span class="footnote"><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">pb.RemoteCopy</a></code> is actually defined
+  in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.flavors.html" title="twisted.spread.flavors">twisted.spread.flavors</a></code>, but
   <code>pb.RemoteCopy</code> is the preferred way to access it</span></a></li><li><a name="footnote-3"><span class="footnote">Of course you could be clever and
 add a hook to <code>__setattr__</code>, along with magical change-announcing
 subclasses of the usual builtin types, to detect changes that result from
 normal <q>=</q> set operations. The semi-magical <q>property attributes</q>
 that were introduced in Python 2.2 could be useful too. The result might be
-hard to maintain or extend, though.</span></a></li><li><a name="footnote-4"><span class="footnote">This is actually a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCacheObserver.html" title="twisted.spread.pb.RemoteCacheObserver">RemoteCacheObserver</a></code>, but it isn't very
+hard to maintain or extend, though.</span></a></li><li><a name="footnote-4"><span class="footnote">This is actually a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCacheObserver.html" title="twisted.spread.pb.RemoteCacheObserver">RemoteCacheObserver</a></code>, but it isn't very
 useful to subclass or modify, so simply treat it as a little demon that sits
 in your <code>pb.Cacheable</code> class and helps you distribute change
 notifications. The only useful thing to do with it is to run its 
 <code>callRemote</code> method, which acts just like a normal 
 <code>pb.Referenceable</code>'s method of the same name.</span></a></li><li><a name="footnote-5"><span class="footnote">This applies to
-  multiple references through the same <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Broker.html" title="twisted.spread.pb.Broker">Broker</a></code>. If you've managed to make multiple
+  multiple references through the same <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Broker.html" title="twisted.spread.pb.Broker">Broker</a></code>. If you've managed to make multiple
   TCP connections to the same program, you deserve whatever you get.</span></a></li></ol></div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

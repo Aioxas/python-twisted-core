@@ -20,7 +20,7 @@ features: the ability for users to set finger announces, and using our finger
 service to send those announcements on the web, on IRC and over XML-RPC.
 Resources and XML-RPC are introduced in the Web Applications portion of
 the <a href="../../../web/howto/index.html" shape="rect">Twisted Web howto</a>. More examples
-using <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.words.protocols.irc.html" title="twisted.words.protocols.irc">twisted.words.protocols.irc</a></code> can be found
+using <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.words.protocols.irc.html" title="twisted.words.protocols.irc">twisted.words.protocols.irc</a></code> can be found
 in <a href="../clients.html" shape="rect">Writing a TCP Client</a> and
 the <a href="../../../words/examples/index.html" shape="rect">Twisted Words examples</a>.</p>
 
@@ -154,9 +154,9 @@ Giving a tutorial now, sorry!
 
 <p>This program has two protocol-factory-TCPServer pairs, which are
 both child services of the application.  Specifically,
-the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Service.setServiceParent.html" title="twisted.application.service.Service.setServiceParent">setServiceParent</a></code>
+the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Service.setServiceParent.html" title="twisted.application.service.Service.setServiceParent">setServiceParent</a></code>
 method is used to define the two TCPServer services as children
-of <code>application</code>, which implements <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code>.  Both
+of <code>application</code>, which implements <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code>.  Both
 services are thus started with the application.</p>
 
 
@@ -196,7 +196,7 @@ attributes inside the factories. We are getting better at protocol design:
 none of our protocol classes had to be changed, and neither will have to
 change until the end of the tutorial.</p>
 
-<p>As an application service, this new finger service implements the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code> interface and
+<p>As an application service, this new finger service implements the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code> interface and
 can be started and stopped in a standardized manner. We'll make use of this in
 the next example.</p>
 
@@ -320,7 +320,7 @@ the next example.</p>
                    ).<span class="py-src-variable">setServiceParent</span>(<span class="py-src-variable">serviceCollection</span>)
 </pre><div class="caption">Source listing - <a href="listings/finger/finger13.tac"><span class="filename">listings/finger/finger13.tac</span></a></div></div>
 
-<p>Most application services will want to use the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Service.html" title="twisted.application.service.Service">Service</a></code> base class, which implements
+<p>Most application services will want to use the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Service.html" title="twisted.application.service.Service">Service</a></code> base class, which implements
 all the generic <code>IService</code> behavior.</p>
 
 <h2>Read Status File<a name="auto3"/></h2>
@@ -453,8 +453,8 @@ shawn: alive
 every 30 seconds), there is no <code>FingerSetterFactory</code> and thus 
 nothing listening on port 1079.</p>
 
-<p>Here we override the standard <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Service.startService.html" title="twisted.application.service.Service.startService">startService</a></code>
-and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Service.stopService.html" title="twisted.application.service.Service.stopService">stopService</a></code> hooks in
+<p>Here we override the standard <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Service.startService.html" title="twisted.application.service.Service.startService">startService</a></code>
+and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Service.stopService.html" title="twisted.application.service.Service.stopService">stopService</a></code> hooks in
 the Finger service, which is set up as a child service of the
 application in the last line of the code. <code>startService</code>
 calls <code>_read</code>, the function responsible for reading the
@@ -1116,6 +1116,6 @@ the resource we've made available at <code>localhost/RPC2</code>.</p>
 </div>
 
     <p><a href="../index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

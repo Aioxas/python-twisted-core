@@ -21,7 +21,7 @@
     <p>At the base, the place where you actually implement the protocol parsing
     and handling, is the <code>Protocol</code> class. This class will usually be
     descended
-    from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">twisted.internet.protocol.Protocol</a></code>. Most
+    from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">twisted.internet.protocol.Protocol</a></code>. Most
     protocol handlers inherit either from this class or from one of its
     convenience children. An instance of the protocol class will be instantiated
     when you connect to the server and will go away when the connection is
@@ -29,8 +29,8 @@
     <code>Protocol</code>.</p>
 
     <p>The persistent configuration is kept in a <code>Factory</code>
-    class, which usually inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">twisted.internet.protocol.Factory</a></code>
-    (or <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ClientFactory.html" title="twisted.internet.protocol.ClientFactory">twisted.internet.protocol.ClientFactory</a></code>: see
+    class, which usually inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">twisted.internet.protocol.Factory</a></code>
+    (or <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ClientFactory.html" title="twisted.internet.protocol.ClientFactory">twisted.internet.protocol.ClientFactory</a></code>: see
     below). The default factory class just instantiates the <code>Protocol</code>
     and then sets the protocol's <code>factory</code> attribute to point to
     itself (the factory). This lets the <code>Protocol</code> access, and
@@ -81,17 +81,17 @@
     <p>This protocol connects to the server, sends it a welcome message, and
     then terminates the connection.</p>
 
-    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.BaseProtocol.connectionMade.html" title="twisted.internet.protocol.BaseProtocol.connectionMade">connectionMade</a></code> event is
+    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.BaseProtocol.connectionMade.html" title="twisted.internet.protocol.BaseProtocol.connectionMade">connectionMade</a></code> event is
     usually where set up of the <code>Protocol</code> object happens, as well as
     any initial greetings (as in the
     <code>WelcomeMessage</code> protocol above). Any tearing down of
-    <code>Protocol</code>-specific objects is done in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.connectionLost.html" title="twisted.internet.protocol.Protocol.connectionLost">connectionLost</a></code>.</p>
+    <code>Protocol</code>-specific objects is done in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.connectionLost.html" title="twisted.internet.protocol.Protocol.connectionLost">connectionLost</a></code>.</p>
 
     <h2>Simple, single-use clients<a name="auto2"/></h2>
 
     <p>In many cases, the protocol only needs to connect to the server once, and
     the code just wants to get a connected instance of the protocol. In those
-    cases <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.endpoints.html" title="twisted.internet.endpoints">twisted.internet.endpoints</a></code> provides the
+    cases <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.endpoints.html" title="twisted.internet.endpoints">twisted.internet.endpoints</a></code> provides the
     appropriate API.</p>
 
     <pre class="python"><p class="py-linenumber"> 1
@@ -143,7 +143,7 @@
     in a factory.  This means it's easy to change the mechanism you're using to
     connect, without changing the rest of your program.  For example, to run
     the greeter example over SSL, the only change required is to instantiate an
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.endpoints.SSL4ClientEndpoint.html" title="twisted.internet.endpoints.SSL4ClientEndpoint">SSL4ClientEndpoint</a></code> instead of a
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.endpoints.SSL4ClientEndpoint.html" title="twisted.internet.endpoints.SSL4ClientEndpoint">SSL4ClientEndpoint</a></code> instead of a
     <code>TCP4ClientEndpoint</code>.  To take advantage of this, functions and
     methods which initiates a new connection should generally accept an
     endpoint as an argument and let the caller construct it, rather than taking
@@ -162,7 +162,7 @@
     <code>clientConnectionFailed</code> and <code>clientConnectionLost</code>
     methods will not be called.</div>
 
-    <p>You may come across code using <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ClientCreator.html" title="twisted.internet.protocol.ClientCreator">ClientCreator</a></code>, an older API which is not as flexible as
+    <p>You may come across code using <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ClientCreator.html" title="twisted.internet.protocol.ClientCreator">ClientCreator</a></code>, an older API which is not as flexible as
     the endpoint API.  Rather than calling <code>connect</code> on an endpoint,
     such code will look like this:</p>
 
@@ -196,7 +196,7 @@
 
     <p>To use the lower-level connection APIs, you will need to call one of the
     <em>reactor.connect*</em> methods directly.  For these cases, you need a
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ClientFactory.html" title="twisted.internet.protocol.ClientFactory">ClientFactory</a></code>.
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ClientFactory.html" title="twisted.internet.protocol.ClientFactory">ClientFactory</a></code>.
     The <code>ClientFactory</code> is in charge of creating the
     <code>Protocol</code> and also receives events relating to the connection
     state. This allows it to do things like reconnect in the event of a
@@ -257,8 +257,8 @@
 <span class="py-src-variable">reactor</span>.<span class="py-src-variable">run</span>()
 </pre>
 
-    <p>Note that <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ClientFactory.clientConnectionFailed.html" title="twisted.internet.protocol.ClientFactory.clientConnectionFailed">clientConnectionFailed</a></code>
-    is called when a connection could not be established, and that <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ClientFactory.clientConnectionLost.html" title="twisted.internet.protocol.ClientFactory.clientConnectionLost">clientConnectionLost</a></code>
+    <p>Note that <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ClientFactory.clientConnectionFailed.html" title="twisted.internet.protocol.ClientFactory.clientConnectionFailed">clientConnectionFailed</a></code>
+    is called when a connection could not be established, and that <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ClientFactory.clientConnectionLost.html" title="twisted.internet.protocol.ClientFactory.clientConnectionLost">clientConnectionLost</a></code>
     is called when a connection was made and then disconnected.</p>
 
     <h3>Reconnection<a name="auto4"/></h3>
@@ -287,7 +287,7 @@
 
     <p>
     However, most programs that want this functionality should
-    implement <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.ReconnectingClientFactory.html" title="twisted.internet.protocol.ReconnectingClientFactory">ReconnectingClientFactory</a></code> instead,
+    implement <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.ReconnectingClientFactory.html" title="twisted.internet.protocol.ReconnectingClientFactory">ReconnectingClientFactory</a></code> instead,
     which tries to reconnect if a connection is lost or fails and which
     exponentially delays repeated reconnect attempts.
     </p>
@@ -717,17 +717,17 @@
 
     <h2>Further Reading<a name="auto8"/></h2>
 
-    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code>
+    <p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code>
     class used throughout this document is a base implementation
-    of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IProtocol.html" title="twisted.internet.interfaces.IProtocol">IProtocol</a></code>
+    of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IProtocol.html" title="twisted.internet.interfaces.IProtocol">IProtocol</a></code>
     used in most Twisted applications for convenience. To learn about the
     complete <code>IProtocol</code> interface, see the API documentation for
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IProtocol.html" title="twisted.internet.interfaces.IProtocol">IProtocol</a></code>.</p>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IProtocol.html" title="twisted.internet.interfaces.IProtocol">IProtocol</a></code>.</p>
 
     <p>The <code>transport</code> attribute used in some examples in this
-    document provides the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.ITCPTransport.html" title="twisted.internet.interfaces.ITCPTransport">ITCPTransport</a></code> interface. To learn
+    document provides the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.ITCPTransport.html" title="twisted.internet.interfaces.ITCPTransport">ITCPTransport</a></code> interface. To learn
     about the complete interface, see the API documentation
-    for <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.ITCPTransport.html" title="twisted.internet.interfaces.ITCPTransport">ITCPTransport</a></code>.</p>
+    for <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.ITCPTransport.html" title="twisted.internet.interfaces.ITCPTransport">ITCPTransport</a></code>.</p>
 
     <p>Interface classes are a way of specifying what methods and attributes an
     object has and how they behave. See the <a href="components.html" shape="rect">
@@ -736,6 +736,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

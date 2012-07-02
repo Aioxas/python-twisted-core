@@ -6,14 +6,14 @@
 
   <body bgcolor="white">
     <h1 class="title">Symbolic Constants</h1>
-    <div class="toc"><ol><li><a href="#auto0">Overview</a></li><li><a href="#auto1">Constant Names</a></li><li><a href="#auto2">Constants With Values</a></li></ol></div>
+    <div class="toc"><ol><li><a href="#auto0">Overview</a></li><li><a href="#auto1">Constant Names</a></li><li><a href="#auto2">Constants With Values</a></li><li><a href="#auto3">Constants As Flags</a></li></ol></div>
     <div class="content">
   <span/>
 
   <h2>Overview<a name="auto0"/></h2>
 
   <p>It is often useful to define names which will be treated as
-  constants.  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.constants.html" title="twisted.python.constants">twisted.python.constants</a></code> provides APIs
+  constants.  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.constants.html" title="twisted.python.constants">twisted.python.constants</a></code> provides APIs
   for defining such symbolic constants with minimal overhead and some useful
   features beyond those afforded by the common Python idioms for this task.</p>
 
@@ -23,7 +23,7 @@
   <h2>Constant Names<a name="auto1"/></h2>
 
   <p>Constants which have no value apart from their name and identity can be
-  defined by subclassing <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.constants.Names.html" title="twisted.python.constants.Names">Names</a></code>.
+  defined by subclassing <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.constants.Names.html" title="twisted.python.constants.Names">Names</a></code>.
   Consider this example, in which some HTTP request method constants are defined.</p>
 
   <pre class="python"><p class="py-linenumber">1
@@ -86,6 +86,7 @@ ValueError: __doc__
   <pre class="shell" xml:space="preserve">
 &gt;&gt;&gt; list(METHOD.iterconstants())
 [&lt;METHOD=GET&gt;, &lt;METHOD=PUT&gt;, &lt;METHOD=POST&gt;, &lt;METHOD=DELETE&gt;]
+&gt;&gt;&gt;
   </pre>
 
   <p>And constants can also be compared, either for equality or identity:</p>
@@ -153,7 +154,7 @@ False
   <h2>Constants With Values<a name="auto2"/></h2>
 
   <p>Constants with a particular associated value are supported by
-  the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.constants.Values.html" title="twisted.python.constants.Values">Values</a></code> base
+  the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.constants.Values.html" title="twisted.python.constants.Values">Values</a></code> base
   class.  Consider this example, in which some HTTP status code constants are
   defined.
   </p>
@@ -249,25 +250,41 @@ False
   <p>And, as with <code>Names</code>, a subclass of <code>Values</code> can
   define methods:</p>
 
-  <pre class="shell" xml:space="preserve">
-from twisted.python.constants import ValueConstant, Values
-class STATUS(Values):
-    &quot;&quot;&quot;
+  <pre class="python"><p class="py-linenumber"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">python</span>.<span class="py-src-variable">constants</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">ValueConstant</span>, <span class="py-src-variable">Values</span>
+<span class="py-src-keyword">class</span> <span class="py-src-identifier">STATUS</span>(<span class="py-src-parameter">Values</span>):
+    <span class="py-src-string">&quot;&quot;&quot;
     Constants representing various HTTP status codes.
-    &quot;&quot;&quot;
-    OK = ValueConstant(&quot;200&quot;)
-    NO_CONTENT = ValueConstant(&quot;204&quot;)
-    NOT_MODIFIED = ValueConstant(&quot;304&quot;)
-    NOT_FOUND = ValueConstant(&quot;404&quot;)
+    &quot;&quot;&quot;</span>
+    <span class="py-src-variable">OK</span> = <span class="py-src-variable">ValueConstant</span>(<span class="py-src-string">&quot;200&quot;</span>)
+    <span class="py-src-variable">NO_CONTENT</span> = <span class="py-src-variable">ValueConstant</span>(<span class="py-src-string">&quot;204&quot;</span>)
+    <span class="py-src-variable">NOT_MODIFIED</span> = <span class="py-src-variable">ValueConstant</span>(<span class="py-src-string">&quot;304&quot;</span>)
+    <span class="py-src-variable">NOT_FOUND</span> = <span class="py-src-variable">ValueConstant</span>(<span class="py-src-string">&quot;404&quot;</span>)
 
-    @classmethod
-    def hasBody(cls, status):
-        &quot;&quot;&quot;
+    @<span class="py-src-variable">classmethod</span>
+    <span class="py-src-keyword">def</span> <span class="py-src-identifier">hasBody</span>(<span class="py-src-parameter">cls</span>, <span class="py-src-parameter">status</span>):
+        <span class="py-src-string">&quot;&quot;&quot;
         Return True if the given status is associated with a response body,
         False otherwise.
-        &quot;&quot;&quot;
-        return status in (cls.NO_CONTENT, cls.NOT_MODIFIED)
-  </pre>
+        &quot;&quot;&quot;</span>
+        <span class="py-src-keyword">return</span> <span class="py-src-variable">status</span> <span class="py-src-keyword">in</span> (<span class="py-src-variable">cls</span>.<span class="py-src-variable">NO_CONTENT</span>, <span class="py-src-variable">cls</span>.<span class="py-src-variable">NOT_MODIFIED</span>)
+</pre>
 
   <p>This functionality can be used as any class methods are used:</p>
 
@@ -279,9 +296,161 @@ False
 &gt;&gt;&gt;
   </pre>
 
+  <h2>Constants As Flags<a name="auto3"/></h2>
+
+  <p>Integers are often used as a simple set for constants.  The values for
+  these constants are assigned as powers of two so that bits in the integer can
+  be set to represent them.  Individual bits are often called <em>flags</em>.
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.constants.Flags.html" title="twisted.python.constants.Flags">Flags</a></code> supports this
+  use-case, including allowing constants with particular bits to be set, for
+  interoperability with other tools.</p>
+
+  <p>POSIX filesystem access control is traditionally done using a bitvector
+  defining which users and groups may perform which operations on a file.  This
+  state might be represented using <code>Flags</code> as follows:</p>
+
+  <pre class="python"><p class="py-linenumber"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">python</span>.<span class="py-src-variable">constants</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">FlagConstant</span>, <span class="py-src-variable">Flags</span>
+<span class="py-src-keyword">class</span> <span class="py-src-identifier">Permission</span>(<span class="py-src-parameter">Flags</span>):
+    <span class="py-src-string">&quot;&quot;&quot;
+    Constants representing user, group, and other access bits for reading,
+    writing, and execution.
+    &quot;&quot;&quot;</span>
+    <span class="py-src-variable">OTHER_EXECUTE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">OTHER_WRITE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">OTHER_READ</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">GROUP_EXECUTE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">GROUP_WRITE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">GROUP_READ</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">USER_EXECUTE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">USER_WRITE</span> = <span class="py-src-variable">FlagConstant</span>()
+    <span class="py-src-variable">USER_READ</span> = <span class="py-src-variable">FlagConstant</span>()
+</pre>
+
+  <p>
+    As for the previous types of constants, these can be accessed as attributes
+    of the class object:
+  </p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; Permission.USER_READ
+&lt;Permission=USER_READ&gt;
+&gt;&gt;&gt; Permission.USER_WRITE
+&lt;Permission=USER_WRITE&gt;
+&gt;&gt;&gt; Permission.USER_EXECUTE
+&lt;Permission=USER_EXECUTE&gt;
+&gt;&gt;&gt;
+  </pre>
+
+  <p>These constant objects also have a <code>value</code> attribute giving
+  their integer value:</p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; Permission.USER_READ.value
+256
+&gt;&gt;&gt;
+  </pre>
+
+  <p>And these constants can be looked up by name or value:</p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; Permission.lookupByName('USER_READ') is Permission.USER_READ
+True
+&gt;&gt;&gt; Permission.lookupByValue(256) is Permission.USER_READ
+True
+&gt;&gt;&gt;
+  </pre>
+
+  <p>Constants can also be combined using the logical operators <code>&amp;</code>
+  (<em>and</em>), <code>|</code> (<em>or</em>), and <code>^</code>
+  (<em>exclusive or</em>).
+  </p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; Permission.USER_READ | Permission.USER_WRITE
+&lt;Permission={USER_READ,USER_WRITE}&gt;
+&gt;&gt;&gt; (Permission.USER_READ | Permission.USER_WRITE) &amp; Permission.USER_WRITE
+&lt;Permission=USER_WRITE&gt;
+&gt;&gt;&gt; (Permission.USER_READ | Permission.USER_WRITE) ^ Permission.USER_WRITE
+&lt;Permission=USER_READ&gt;
+&gt;&gt;&gt;
+  </pre>
+
+  <p>The unary operator <code>~</code> (<em>not</em>) is also defined:</p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; ~Permission.USER_READ
+&lt;Permission={GROUP_EXECUTE,GROUP_READ,GROUP_WRITE,OTHER_EXECUTE,OTHER_READ,OTHER_WRITE,USER_EXECUTE,USER_WRITE}&gt;
+&gt;&gt;&gt;
+  </pre>
+
+  <p>Constants created using these operators also have a <code>value</code>
+  attribute.</p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; (~Permission.USER_WRITE).value
+383
+&gt;&gt;&gt;
+  </pre>
+
+  <p>
+    Note the care taken to ensure the <code>~</code> operator is applied first
+    and the <code>value</code>attribute is looked up second.
+  </p>
+
+  <p>A <code>Flags</code> subclass can also define methods, just as
+  a <code>Names</code> or <code>Values</code> subclass may.  For example,
+  <code>Permission</code> might benefit from a method to format a flag as a
+  string in the traditional style.  Consider this addition to that class:</p>
+
+  <pre class="python"><p class="py-linenumber"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">python</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">filepath</span>
+<span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">python</span>.<span class="py-src-variable">constants</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">FlagConstant</span>, <span class="py-src-variable">Flags</span>
+<span class="py-src-keyword">class</span> <span class="py-src-identifier">Permission</span>(<span class="py-src-parameter">Flags</span>):
+    ...
+
+    @<span class="py-src-variable">classmethod</span>
+    <span class="py-src-keyword">def</span> <span class="py-src-identifier">format</span>(<span class="py-src-parameter">cls</span>, <span class="py-src-parameter">permissions</span>):
+        <span class="py-src-string">&quot;&quot;&quot;
+        Format permissions flags in the traditional 'rwxr-xr-x' style.
+        &quot;&quot;&quot;</span>
+        <span class="py-src-keyword">return</span> <span class="py-src-variable">filepath</span>.<span class="py-src-variable">Permissions</span>(<span class="py-src-variable">permissions</span>.<span class="py-src-variable">value</span>).<span class="py-src-variable">shorthand</span>()
+</pre>
+
+  <p>Use this like any other class method:</p>
+
+  <pre class="shell" xml:space="preserve">
+&gt;&gt;&gt; Permission.format(Permission.USER_READ | Permission.USER_WRITE | Permission.GROUP_READ | Permission.OTHER_READ)
+'rw-r--r--'
+&gt;&gt;&gt;
+  </pre>
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

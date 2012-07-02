@@ -305,7 +305,7 @@ as the sender of the message.</p>
 <p>This technique also relies upon the fact that the 
  <code>pb.Referenceable</code> reference can <em>only</em> come from someone
 who holds a corresponding <code>pb.RemoteReference</code>. The design of the
-serialization mechanism (implemented in <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">twisted.spread.jelly</a></code>: pb, jelly, spread.. get it?  Look for 
+serialization mechanism (implemented in <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">twisted.spread.jelly</a></code>: pb, jelly, spread.. get it?  Look for 
 <q>banana</q>, too.  What other networking framework
 can claim API names based on sandwich ingredients?) makes it impossible for
 a client to obtain a reference that they weren't explicitly given.
@@ -1229,8 +1229,8 @@ either anonymously or with username/password credentials.
 
 <p>pbAnonServer.py implements a server based on pb6server.py, extending it to
 permit anonymous logins in addition to authenticated logins. An 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.checkers.AllowAnonymousAccess.html" title="twisted.cred.checkers.AllowAnonymousAccess">AllowAnonymousAccess</a></code>
-checker and an <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse.html" title="twisted.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse">InMemoryUsernamePasswordDatabaseDontUse</a></code>
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.checkers.AllowAnonymousAccess.html" title="twisted.cred.checkers.AllowAnonymousAccess">AllowAnonymousAccess</a></code>
+checker and an <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse.html" title="twisted.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse">InMemoryUsernamePasswordDatabaseDontUse</a></code>
 checker are registered and the
 client's choice of credentials object determines which is used to authenticate
 the login.  In either case, the realm will be called on to create an avatar for
@@ -1238,8 +1238,8 @@ the login.  <code>AllowAnonymousAccess</code> always produces an <code>avatarId
  </code> of <code>twisted.cred.checkers.ANONYMOUS</code>.</p>
 
 <p>On the client side, the only change is the use of an instance of 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.credentials.Anonymous.html" title="twisted.cred.credentials.Anonymous">Anonymous</a></code> when calling 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBClientFactory.login.html" title="twisted.spread.pb.PBClientFactory.login">PBClientFactory.login</a></code>.</p>
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.credentials.Anonymous.html" title="twisted.cred.credentials.Anonymous">Anonymous</a></code> when calling 
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBClientFactory.login.html" title="twisted.spread.pb.PBClientFactory.login">PBClientFactory.login</a></code>.</p>
 
 
 <h2>Using Avatars<a name="auto12"/></h2>
@@ -1426,7 +1426,7 @@ when the connection is lost.</p>
 <h3>Viewable<a name="auto17"/></h3> <a name="viewable" shape="rect"/>
 
 <p>Once you have <code>IPerspective</code> objects (i.e. the Avatar) to
-represent users, the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Viewable.html" title="twisted.spread.pb.Viewable">Viewable</a></code> class can come into play. This
+represent users, the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Viewable.html" title="twisted.spread.pb.Viewable">Viewable</a></code> class can come into play. This
 class behaves a lot like <code>Referenceable</code>: it turns into a 
  <code>RemoteReference</code> when sent over the wire, and certain methods
 can be invoked by the holder of that reference. However, the methods that
@@ -1719,6 +1719,6 @@ in-place <em>and</em> maintain a reasonable level of
 backwards-compatibility.</span></a></li></ol></div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

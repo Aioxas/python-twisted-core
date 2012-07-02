@@ -16,7 +16,8 @@ from zope.interface import implements, classImplements
 
 from twisted.python.compat import set
 from twisted.internet.interfaces import IReactorUNIX, IReactorUNIXDatagram
-from twisted.internet.interfaces import IReactorTCP, IReactorUDP, IReactorSSL, _IReactorArbitrary
+from twisted.internet.interfaces import (
+    IReactorTCP, IReactorUDP, IReactorSSL, _IReactorArbitrary, IReactorSocket)
 from twisted.internet.interfaces import IReactorProcess, IReactorMulticast
 from twisted.internet.interfaces import IHalfCloseableDescriptor
 from twisted.internet import error
@@ -233,14 +234,11 @@ class _SIGCHLDWaker(_FDWaker):
 
 
 
-class PosixReactorBase(_SignalReactorMixin, ReactorBase):
-    """
-    A basis for reactors that use file descriptors.
 
-    @ivar _childWaker: C{None} or a reference to the L{_SIGCHLDWaker}
-        which is used to properly notice child process termination.
+class _DisconnectSelectableMixin(object):
     """
-    implements(_IReactorArbitrary, IReactorTCP, IReactorUDP, IReactorMulticast)
+    Mixin providing the C{_disconnectSelectable} method.
+    """
 
     def _disconnectSelectable(self, selectable, why, isRead, faildict={
         error.ConnectionDone: failure.Failure(error.ConnectionDone()),
@@ -265,6 +263,17 @@ class PosixReactorBase(_SignalReactorMixin, ReactorBase):
             self.removeWriter(selectable)
             selectable.connectionLost(failure.Failure(why))
 
+
+
+class PosixReactorBase(_SignalReactorMixin, _DisconnectSelectableMixin,
+                       ReactorBase):
+    """
+    A basis for reactors that use file descriptors.
+
+    @ivar _childWaker: C{None} or a reference to the L{_SIGCHLDWaker}
+        which is used to properly notice child process termination.
+    """
+    implements(_IReactorArbitrary, IReactorTCP, IReactorUDP, IReactorMulticast)
 
     # Callable that creates a waker, overrideable so that subclasses can
     # substitute their own implementation:
@@ -423,6 +432,25 @@ class PosixReactorBase(_SignalReactorMixin, ReactorBase):
         """
         assert unixEnabled, "UNIX support is not present"
         p = unix.ConnectedDatagramPort(address, protocol, maxPacketSize, mode, bindAddress, self)
+        p.startListening()
+        return p
+
+
+    # IReactorSocket (but not on Windows)
+    def adoptStreamPort(self, fileDescriptor, addressFamily, factory):
+        """
+        Create a new L{IListeningPort} from an already-initialized socket.
+
+        This just dispatches to a suitable port implementation (eg from
+        L{IReactorTCP}, etc) based on the specified C{addressFamily}.
+
+        @see: L{twisted.internet.interfaces.IReactorSocket.adoptStreamPort}
+        """
+        if addressFamily not in (socket.AF_INET, socket.AF_INET6):
+            raise error.UnsupportedAddressFamily(addressFamily)
+
+        p = tcp.Port._fromListeningDescriptor(
+            self, fileDescriptor, addressFamily, factory)
         p.startListening()
         return p
 
@@ -606,5 +634,7 @@ if unixEnabled:
     classImplements(PosixReactorBase, IReactorUNIX, IReactorUNIXDatagram)
 if processEnabled:
     classImplements(PosixReactorBase, IReactorProcess)
+if getattr(socket, 'fromfd', None) is not None:
+    classImplements(PosixReactorBase, IReactorSocket)
 
 __all__ = ["PosixReactorBase"]

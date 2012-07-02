@@ -68,20 +68,20 @@ application. It uses <code>PBServerFactory()</code> on the server side, and
 </pre><div class="caption">Source listing - <a href="../examples/pbsimpleclient.py"><span class="filename">../examples/pbsimpleclient.py</span></a></div></div>
 
 <p>First we look at the server. This defines an Echoer class (derived from 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>), with a method called 
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>), with a method called 
  <code>remote_echo()</code>. 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> objects (because of
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> objects (because of
 their inheritance of 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>, described
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>, described
 later) can define methods with names of the form <code>remote_*</code>; a
 client which obtains a remote reference to that 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> object will be able to
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> object will be able to
 invoke those methods.</p>
 
-<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>-ish object is
-given to a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">pb.PBServerFactory</a></code><code>()</code>. This is a 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">Factory</a></code> object like
-any other: the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code> objects it creates for new
+<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>-ish object is
+given to a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">pb.PBServerFactory</a></code><code>()</code>. This is a 
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">Factory</a></code> object like
+any other: the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Protocol.html" title="twisted.internet.protocol.Protocol">Protocol</a></code> objects it creates for new
 connections know how to speak the PB protocol. The object you give to 
  <code>pb.PBServerFactory()</code> becomes the <q>root object</q>, which
 simply makes it available for the client to retrieve. The client may only
@@ -89,11 +89,11 @@ request references to the objects you want to provide it: this helps you
 implement your security model. Because it is so common to export just a
 single object (and because a <code>remote_*</code> method on that one can
 return a reference to any other object you might want to give out), the
-simplest example is one where the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code> is given the root object, and
+simplest example is one where the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code> is given the root object, and
 the client retrieves it.</p>
 
 <p>The client side uses 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBClientFactory.html" title="twisted.spread.pb.PBClientFactory">pb.PBClientFactory</a></code> to make a
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBClientFactory.html" title="twisted.spread.pb.PBClientFactory">pb.PBClientFactory</a></code> to make a
 connection to a given port. This is a two-step process involving opening
 a TCP connection to a given host and port and requesting the root object
 using <code>.getRootObject()</code>.</p>
@@ -102,7 +102,7 @@ using <code>.getRootObject()</code>.</p>
 connection has been made and exchange some data, it may take a while,
 so it returns a Deferred, to which the gotObject() callback is
 attached. (See the documentation on <a href="defer.html" shape="rect">Deferring
-Execution</a> for a complete explanation of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>s). If and when the
+Execution</a> for a complete explanation of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>s). If and when the
 connection succeeds and a reference to the remote root object is
 obtained, this callback is run. The first argument passed to the
 callback is a remote reference to the distant root object.  (you can
@@ -119,10 +119,10 @@ give other arguments to the callback too, see the other parameters for
 (running <code>.callRemote(&quot;boom&quot;)</code> would cause 
  <code>.remote_boom()</code> to be run, etc). Again because of the delay
 involved, <code>callRemote()</code> returns a 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>. Assuming the
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>. Assuming the
 remote method was run without causing an exception (including an attempt to
 invoke an unknown method), the callback attached to that 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> will be
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> will be
 invoked with any objects that were returned by the remote method call.</p>
 
 <p>In this example, the server's <code>Echoer</code> object has a method
@@ -135,8 +135,8 @@ invoked, <em>exactly</em> as if some code on the server side had done:</p>
 <p>and from the definition of <code>remote_echo()</code> we see that this just
 returns the same string it was given: <q>hello network</q>.</p>
 
-<p>From the client's point of view, the remote call gets another <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> object instead of
-that string. <code>callRemote()</code> <em>always</em> returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>. This is why PB is
+<p>From the client's point of view, the remote call gets another <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> object instead of
+that string. <code>callRemote()</code> <em>always</em> returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>. This is why PB is
 described as a system for <q>translucent</q> remote method calls instead of 
 <q>transparent</q> ones: you cannot pretend that the remote object is really
 local. Trying to do so (as some other RPC mechanisms do, coughCORBAcough)
@@ -144,17 +144,17 @@ breaks down when faced with the asynchronous nature of the network. Using
 Deferreds turns out to be a very clean way to deal with the whole thing.</p>
 
 <p>The remote reference object (the one given to 
- <code>getRootObject()</code>'s success callback) is an instance the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> class. This means
+ <code>getRootObject()</code>'s success callback) is an instance the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> class. This means
 you can use it to invoke methods on the remote object that it refers to. Only
-instances of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> are eligible for 
- <code>.callRemote()</code>. The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> object is the one that lives
+instances of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> are eligible for 
+ <code>.callRemote()</code>. The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> object is the one that lives
 on the remote side (the client, in this case), not the local side (where the
 actual object is defined).</p>
 
 <p>In our example, the local object is that <code>Echoer()</code> instance,
-which inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>,
+which inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>,
 which inherits from 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>. It is that 
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>. It is that 
  <code>Referenceable</code> class that makes the object eligible to be available
 for remote method calls<a href="#footnote-1" title="There are a few other classes that can bestow this ability, but pb.Referenceable is the easiest to understand; see 'flavors' below for details on the others."><super>1</super></a>. If you have
 an object that is Referenceable, then any client that manages to get a
@@ -167,31 +167,31 @@ of view, you control what they can do by limiting what the
 <code>remote_*</code> methods can do.</p>
 
 <p>Also note: the other classes like 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code> allow access to
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code> allow access to
 other methods, in particular <code>perspective_*</code> and <code>view_*</code>
 may be accessed.  Don't write local-only methods with these names, because then
 remote callers will be able to do more than you intended.</p>
 
 <p>Also also note: the other classes like 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code> <em>do</em> allow
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code> <em>do</em> allow
 access to attributes, but you control which ones they can see.</p>
 </div>
 
 <p>You don't have to be a 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> to be remotely callable,
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> to be remotely callable,
 but you do have to be 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>.  (Objects that
-inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>
-but not from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> can be
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>.  (Objects that
+inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>
+but not from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> can be
 remotely called, but only 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>-ish objects can be given
-to the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code>.)</p>
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>-ish objects can be given
+to the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code>.)</p>
 
 <h2>Complete Example<a name="auto1"/></h2>
 
-<p>Here is an example client and server which uses <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code> as a root object and as the
+<p>Here is an example client and server which uses <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code> as a root object and as the
 result of a remotely exposed method.  In each context, methods can be invoked
-on the exposed <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code>
+on the exposed <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code>
 instance.  In this example, the initial root object has a method that returns a
 reference to the second object.</p>
 
@@ -300,11 +300,11 @@ reference to the second object.</p>
 <span class="py-src-variable">main</span>()
 </pre><div class="caption">Source listing - <a href="listings/pb/pb1client.py"><span class="filename">listings/pb/pb1client.py</span></a></div></div>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBClientFactory.getRootObject.html" title="twisted.spread.pb.PBClientFactory.getRootObject">pb.PBClientFactory.getRootObject</a></code> will
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBClientFactory.getRootObject.html" title="twisted.spread.pb.PBClientFactory.getRootObject">pb.PBClientFactory.getRootObject</a></code> will
 handle all the details of waiting for the creation of a connection.
-It returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>, which will have its
+It returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>, which will have its
 callback called when the reactor connects to the remote server and 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBClientFactory.html" title="twisted.spread.pb.PBClientFactory">pb.PBClientFactory</a></code> gets the
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBClientFactory.html" title="twisted.spread.pb.PBClientFactory">pb.PBClientFactory</a></code> gets the
 root, and have its <code class="python">errback</code> called when the
 object-connection fails for any reason, whether it was host lookup
 failure, connection refusal, or some server-side error.
@@ -312,24 +312,24 @@ failure, connection refusal, or some server-side error.
 
 <p>The root object has a method called <code>remote_getTwo</code>, which
 returns the <code>Two()</code> instance. On the client end, the callback gets
-a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> to that
+a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> to that
 instance. The client can then invoke two's <code>.remote_three()</code>
 method.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>
 objects have one method which is their purpose for being: <code class="python">callRemote</code>.  This method allows you to call a
-remote method on the object being referred to by the Reference.  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">RemoteReference.callRemote</a></code>, like <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBClientFactory.getRootObject.html" title="twisted.spread.pb.PBClientFactory.getRootObject">pb.PBClientFactory.getRootObject</a></code>, returns
-a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>.
-When a response to the method-call being sent arrives, the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>'s <code class="python">callback</code> or <code class="python">errback</code>
+remote method on the object being referred to by the Reference.  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.callRemote.html" title="twisted.spread.pb.RemoteReference.callRemote">RemoteReference.callRemote</a></code>, like <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBClientFactory.getRootObject.html" title="twisted.spread.pb.PBClientFactory.getRootObject">pb.PBClientFactory.getRootObject</a></code>, returns
+a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>.
+When a response to the method-call being sent arrives, the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>'s <code class="python">callback</code> or <code class="python">errback</code>
 will be made, depending on whether an error occurred in processing the
 method call.</p>
 
 <p>You can use this technique to provide access to arbitrary sets of objects.
 Just remember that any object that might get passed <q>over the wire</q> must
-inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code>
+inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">Referenceable</a></code>
 (or one of the other flavors). If you try to pass a non-Referenceable object
 (say, by returning one from a <code>remote_*</code> method), you'll get an 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
 exception<a href="#footnote-2" title="This can be overridden, by subclassing one of the Serializable flavors and defining custom serialization code for your class. See Passing Complex Types for details."><super>2</super></a>.</p>
 
 
@@ -613,16 +613,16 @@ about when they go wrong? The Python Way is to raise an exception of some
 sort. The Twisted Way is the same.</p>
 
 <p>The only special thing you do is to define your <code>Exception</code>
-subclass by deriving it from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Error.html" title="twisted.spread.pb.Error">pb.Error</a></code>. When any remotely-invokable method
+subclass by deriving it from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Error.html" title="twisted.spread.pb.Error">pb.Error</a></code>. When any remotely-invokable method
 (like <code>remote_*</code> or <code>perspective_*</code>) raises a 
  <code>pb.Error</code>-derived exception, a serialized form of that Exception
 object will be sent back over the wire<a href="#footnote-4" title="To be precise, the Failure will be sent if any exception is raised, not just pb.Error-derived ones. But the server will print ugly error messages if you raise ones that aren't derived from pb.Error."><super>4</super></a>. The other side (which
 did <code>callRemote</code>) will have the <q><code>errback</code></q>
-callback run with a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> object that contains a copy of
+callback run with a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> object that contains a copy of
 the exception object. This <code>Failure</code> object can be queried to
 retrieve the error message and a stack traceback.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> is a
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">Failure</a></code> is a
 special class, defined in <code>twisted/python/failure.py</code>, created to
 make it easier to handle asynchronous exceptions. Just as exception handlers
 can be nested, <code>errback</code> functions can be chained. If one errback
@@ -790,7 +790,7 @@ trapped, just like most exceptions that occur in response to network
 traffic), but it will print out an unsightly stack trace on the server's
 stderr with a message that says <q>Peer Will Receive PB Traceback</q>, just
 as if the exception had happened outside a remotely-invokable method. (This
-message will go the current log target, if <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">log.startLogging</a></code> was used to redirect it). The
+message will go the current log target, if <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">log.startLogging</a></code> was used to redirect it). The
 client will get the same <code>Failure</code> object in either case, but
 subclassing your exception from <code>pb.Error</code> is the way to tell
 Twisted that you expect this sort of exception, and that it is ok to just
@@ -799,7 +799,7 @@ at <code>exc_client.py</code> and change it to invoke <code>broken2()</code>
 instead of <code>broken()</code> to see the change in the server's
 behavior.</p>
 
-<p>If you don't add an <code>errback</code> function to the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>, then a remote
+<p>If you don't add an <code>errback</code> function to the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code>, then a remote
 exception will still send a <code>Failure</code> object back over, but it
 will get lodged in the <code>Deferred</code> with nowhere to go. When that 
  <code>Deferred</code> finally goes out of scope, the side that did 
@@ -808,9 +808,9 @@ Deferred</q>, along with an ugly stack trace. It can't raise an exception at
 that point (after all, the <code>callRemote</code> that triggered the
 problem is long gone), but it will emit a traceback. So be a good programmer
 and <em>always</em> add <code>errback</code> handlers, even if they are just
-calls to <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.err.html" title="twisted.python.log.err">log.err</a></code>.</p>
+calls to <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.err.html" title="twisted.python.log.err">log.err</a></code>.</p>
 
-<h2>Try/Except blocks and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.trap.html" title="twisted.python.failure.Failure.trap">Failure.trap</a></code> <a name="auto5"/></h2>
+<h2>Try/Except blocks and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.trap.html" title="twisted.python.failure.Failure.trap">Failure.trap</a></code> <a name="auto5"/></h2>
 
 <p>To implement the equivalent of the Python try/except blocks (which can
 trap particular kinds of exceptions and pass others <q>up</q> to
@@ -1063,7 +1063,7 @@ callFour: call on stale reference
 
 <p>In this example, <code>callTwo</code> tries to send an instance of a
 locally-defined class through <code>callRemote</code>. The default security
-model implemented by <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">jelly</a></code>
+model implemented by <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">jelly</a></code>
 on the remote end will not allow unknown classes to be unserialized (i.e.
 taken off the wire as a stream of bytes and turned back into an object: a
 living, breathing instance of some class): one reason is that it does not
@@ -1071,7 +1071,7 @@ know which local class ought to be used to create an instance that
 corresponds to the remote object<a href="#footnote-5" title="The naive approach of simply doing import SomeClass to match a remote caller who claims to have an object of type SomeClass could have nasty consequences for some modules that do significant operations in their __init__ methods (think telnetlib.Telnet(host='localhost', port='chargen'), or even more powerful classes that you have available in your server program). Allowing a remote entity to create arbitrary classes in your namespace is nearly equivalent to allowing them to run arbitrary code. The InsecureJelly exception arises because the class being sent over the wire has not been registered with the serialization layer (known as jelly). The easiest way to make it possible to copy entire class instances over the wire is to have them inherit from pb.Copyable, and then to use setUnjellyableForClass(remoteClass, localClass) on the receiving side. See Passing Complex Types for an example."><super>5</super></a>.</p>
 
 <p>The receiving end of the connection gets to decide what to accept and what
-to reject. It indicates its disapproval by raising a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">jelly.InsecureJelly</a></code> exception. Because it occurs
+to reject. It indicates its disapproval by raising a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">jelly.InsecureJelly</a></code> exception. Because it occurs
 at the remote end, the exception is returned to the caller asynchronously,
 so an <code>errback</code> handler for the associated <code>Deferred</code>
 is run. That errback receives a <code>Failure</code> which wraps the 
@@ -1086,7 +1086,7 @@ checked in a single errback: give a list of exception types to
  <code>trap</code>, and it will return the matching member. In this case, the
 kinds of exceptions we are checking for (<code>MyException</code> and 
  <code>MyOtherException</code>) may be raised by the remote end: they inherit
-from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Error.html" title="twisted.spread.pb.Error">pb.Error</a></code>.</p>
+from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Error.html" title="twisted.spread.pb.Error">pb.Error</a></code>.</p>
 
 <p>The handler can return <code>None</code> to terminate processing of the
 errback chain (to be precise, it switches to the callback that follows the
@@ -1099,19 +1099,19 @@ your errback handlers could themselves raise exceptions. The extra
 importance in an asynchronous environment is that an exception that falls
 off the end of the <code>Deferred</code> will not be signalled until that 
  <code>Deferred</code> goes out of scope, and at that point may only cause a
-log message (which could even be thrown away if <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">log.startLogging</a></code> is not used to point it at
+log message (which could even be thrown away if <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.startLogging.html" title="twisted.python.log.startLogging">log.startLogging</a></code> is not used to point it at
 stdout or a log file). In contrast, a synchronous exception that is not
 handled by any other <code>except:</code> block will very visibly terminate
 the program immediately with a noisy stack trace.</p>
 
 <p><code>callFour</code> shows another kind of exception that can occur
-while using <code>callRemote</code>: <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.DeadReferenceError.html" title="twisted.spread.pb.DeadReferenceError">pb.DeadReferenceError</a></code>. This one occurs when the
+while using <code>callRemote</code>: <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.DeadReferenceError.html" title="twisted.spread.pb.DeadReferenceError">pb.DeadReferenceError</a></code>. This one occurs when the
 remote end has disconnected or crashed, leaving the local side with a stale
 reference. This kind of exception happens to be reported right away (XXX: is
 this guaranteed? probably not), so must be caught in a traditional
 synchronous <code>try: except pb.DeadReferenceError</code> block. </p>
 
-<p>Yet another kind that can occur is a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBConnectionLost.html" title="twisted.spread.pb.PBConnectionLost">pb.PBConnectionLost</a></code> exception. This occurs
+<p>Yet another kind that can occur is a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBConnectionLost.html" title="twisted.spread.pb.PBConnectionLost">pb.PBConnectionLost</a></code> exception. This occurs
 (asynchronously) if the connection was lost while you were waiting for a 
 <code>callRemote</code> call to complete. When the line goes dead, all
 pending requests are terminated with this exception. Note that you have no
@@ -1142,15 +1142,15 @@ methods (think <code>telnetlib.Telnet(host='localhost', port='chargen')</code>,
  or even more powerful classes that you have available in your server program).
 Allowing a remote entity to create arbitrary classes in your namespace is
 nearly equivalent to allowing them to run arbitrary code.</p>
-<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
+<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.InsecureJelly.html" title="twisted.spread.jelly.InsecureJelly">InsecureJelly</a></code>
 exception arises because the class being sent over the wire has not been
-registered with the serialization layer (known as <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">jelly</a></code>). The easiest way to make it possible to
-copy entire class instances over the wire is to have them inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, and then to use 
+registered with the serialization layer (known as <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.jelly.html" title="twisted.spread.jelly">jelly</a></code>). The easiest way to make it possible to
+copy entire class instances over the wire is to have them inherit from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">pb.Copyable</a></code>, and then to use 
  <code>setUnjellyableForClass(remoteClass, localClass)</code> on the
 receiving side. See <a href="pb-copyable.html" shape="rect">Passing Complex Types</a>
 for an example.</p></span></a></li></ol></div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

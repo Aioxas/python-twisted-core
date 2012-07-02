@@ -7,9 +7,11 @@ Tests for implementations of L{ITLSTransport}.
 
 __metaclass__ = type
 
+import sys, operator
+
 from zope.interface import implements
 
-from twisted.internet.test.reactormixins import ReactorBuilder
+from twisted.internet.test.reactormixins import ReactorBuilder, EndpointCreator
 from twisted.internet.protocol import ServerFactory, ClientFactory, Protocol
 from twisted.internet.interfaces import (
     IReactorSSL, ITLSTransport, IStreamClientEndpoint)
@@ -18,14 +20,14 @@ from twisted.internet.endpoints import (
     SSL4ServerEndpoint, SSL4ClientEndpoint, TCP4ClientEndpoint)
 from twisted.internet.error import ConnectionClosed
 from twisted.internet.task import Cooperator
-from twisted.trial.unittest import SkipTest
+from twisted.trial.unittest import TestCase, SkipTest
 from twisted.python.runtime import platform
 
 from twisted.internet.test.test_core import ObjectModelIntegrationMixin
-from twisted.internet.test.test_tcp import StreamTransportTestsMixin
-from twisted.internet.test.connectionmixins import ConnectionTestsMixin
 from twisted.internet.test.test_tcp import (
-    BrokenContextFactory, AbortConnectionMixin)
+    StreamTransportTestsMixin, AbortConnectionMixin)
+from twisted.internet.test.connectionmixins import ConnectionTestsMixin
+from twisted.internet.test.connectionmixins import BrokenContextFactory
 
 try:
     from OpenSSL.crypto import FILETYPE_PEM
@@ -121,22 +123,27 @@ class StartTLSClientEndpoint(object):
         immediately start TLS on it.  Return a L{Deferred} which fires with the
         protocol instance.
         """
-        d = self.wrapped.connect(factory)
-        def connected(protocol):
-            protocol.transport.startTLS(self.contextFactory)
-            return protocol
-        d.addCallback(connected)
-        return d
+        # This would be cleaner when we have ITransport.switchProtocol, which
+        # will be added with ticket #3204:
+        class WrapperFactory(ServerFactory):
+            def buildProtocol(wrapperSelf, addr):
+                protocol = factory.buildProtocol(addr)
+                def connectionMade(orig=protocol.connectionMade):
+                    protocol.transport.startTLS(self.contextFactory)
+                    orig()
+                protocol.connectionMade = connectionMade
+                return protocol
+
+        return self.wrapped.connect(WrapperFactory())
 
 
 
-class StartTLSClientTestsMixin(TLSMixin, ReactorBuilder, ConnectionTestsMixin,
-                               ContextGeneratingMixin):
+class StartTLSClientCreator(EndpointCreator, ContextGeneratingMixin):
     """
-    Tests for TLS connections established using L{ITLSTransport.startTLS} (as
-    opposed to L{IReactorSSL.connectSSL} or L{IReactorSSL.listenSSL}).
+    Create L{ITLSTransport.startTLS} endpoint for the client, and normal SSL
+    for server just because it's easier.
     """
-    def serverEndpoint(self, reactor):
+    def server(self, reactor):
         """
         Construct an SSL server endpoint.  This should be be constructing a TCP
         server endpoint which immediately calls C{startTLS} instead, but that
@@ -145,7 +152,7 @@ class StartTLSClientTestsMixin(TLSMixin, ReactorBuilder, ConnectionTestsMixin,
         return SSL4ServerEndpoint(reactor, 0, self.getServerContext())
 
 
-    def clientEndpoint(self, reactor, serverAddress):
+    def client(self, reactor, serverAddress):
         """
         Construct a TCP client endpoint wrapped to immediately start TLS.
         """
@@ -179,20 +186,27 @@ class BadContextTestsMixin(object):
 
 
 
-class SSLClientTestsMixin(TLSMixin, ReactorBuilder, ContextGeneratingMixin,
-                          ConnectionTestsMixin, BadContextTestsMixin):
+class StartTLSClientTestsMixin(TLSMixin, ReactorBuilder, ConnectionTestsMixin):
     """
-    Mixin defining tests relating to L{ITLSTransport}.
+    Tests for TLS connections established using L{ITLSTransport.startTLS} (as
+    opposed to L{IReactorSSL.connectSSL} or L{IReactorSSL.listenSSL}).
     """
+    endpoints = StartTLSClientCreator()
 
-    def serverEndpoint(self, reactor):
+
+
+class SSLCreator(EndpointCreator, ContextGeneratingMixin):
+    """
+    Create SSL endpoints.
+    """
+    def server(self, reactor):
         """
         Create an SSL server endpoint on a TCP/IP-stack allocated port.
         """
         return SSL4ServerEndpoint(reactor, 0, self.getServerContext())
 
 
-    def clientEndpoint(self, reactor, serverAddress):
+    def client(self, reactor, serverAddress):
         """
         Create an SSL client endpoint which will connect localhost on
         the port given by C{serverAddress}.
@@ -203,6 +217,13 @@ class SSLClientTestsMixin(TLSMixin, ReactorBuilder, ContextGeneratingMixin,
             reactor, '127.0.0.1', serverAddress.port,
             ClientContextFactory())
 
+
+class SSLClientTestsMixin(TLSMixin, ReactorBuilder, ContextGeneratingMixin,
+                          ConnectionTestsMixin, BadContextTestsMixin):
+    """
+    Mixin defining tests relating to L{ITLSTransport}.
+    """
+    endpoints = SSLCreator()
 
     def test_badContext(self):
         """
@@ -338,7 +359,11 @@ globals().update(TLSPortTestsBuilder().makeTestCaseClasses())
 
 
 class AbortSSLConnectionTest(ReactorBuilder, AbortConnectionMixin, ContextGeneratingMixin):
+    """
+    C{abortConnection} tests using SSL.
+    """
     requiredInterfaces = (IReactorSSL,)
+    endpoints = SSLCreator()
 
     def buildReactor(self):
         reactor = ReactorBuilder.buildReactor(self)
@@ -358,25 +383,50 @@ class AbortSSLConnectionTest(ReactorBuilder, AbortConnectionMixin, ContextGenera
     def setUp(self):
         if FILETYPE_PEM is None:
             raise SkipTest("OpenSSL not available.")
-        self.serverContext = self.getServerContext()
-        self.clientContext = self.getClientContext()
-        self.clientContext.method = self.serverContext.method
-
-
-    def listen(self, reactor, server):
-        """
-        Listen using SSL.
-        """
-        return reactor.listenSSL(
-            0, server, self.serverContext, interface="127.0.0.1")
-
-
-    def connect(self, clientcreator, serverport):
-        """
-        Connect using SSL.
-        """
-        return clientcreator.connectSSL(
-            serverport.getHost().host, serverport.getHost().port,
-            self.clientContext)
 
 globals().update(AbortSSLConnectionTest.makeTestCaseClasses())
+
+class OldTLSDeprecationTest(TestCase):
+    """
+    Tests for the deprecation of L{twisted.internet._oldtls}, the implementation
+    module for L{IReactorSSL} used when only an old version of pyOpenSSL is
+    available.
+    """
+    def test_warning(self):
+        """
+        The use of L{twisted.internet._oldtls} is deprecated, and emits a
+        L{DeprecationWarning}.
+        """
+        # Since _oldtls depends on OpenSSL, just skip this test if it isn't
+        # installed on the system.  Faking it would be error prone.
+        try:
+            import OpenSSL
+        except ImportError:
+            raise SkipTest("OpenSSL not available.")
+
+        # Change the apparent version of OpenSSL to one support for which is
+        # deprecated.  And have it change back again after the test.
+        self.patch(OpenSSL, '__version__', '0.5')
+
+        # If the module was already imported, the import statement below won't
+        # execute its top-level code.  Take it out of sys.modules so the import
+        # system re-evaluates it.  Arrange to put the original back afterwards.
+        # Also handle the case where it hasn't yet been imported.
+        try:
+            oldtls = sys.modules['twisted.internet._oldtls']
+        except KeyError:
+            self.addCleanup(sys.modules.pop, 'twisted.internet._oldtls')
+        else:
+            del sys.modules['twisted.internet._oldtls']
+            self.addCleanup(
+                operator.setitem, sys.modules, 'twisted.internet._oldtls',
+                oldtls)
+
+        # The actual test.
+        import twisted.internet._oldtls
+        warnings = self.flushWarnings()
+        self.assertEqual(warnings[0]['category'], DeprecationWarning)
+        self.assertEqual(
+            warnings[0]['message'],
+            "Support for pyOpenSSL 0.5 is deprecated.  "
+            "Upgrade to pyOpenSSL 0.10 or newer.")

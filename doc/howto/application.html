@@ -43,17 +43,17 @@ called <code>twistd</code>.  <code>twistd</code> is cross platform, and is the
 recommended tool for running Twisted applications.  </p>
 
 
-<p>The core component of the Twisted Application infrastructure is the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Application.html" title="twisted.application.service.Application">twisted.application.service.Application</a></code> object — an
+<p>The core component of the Twisted Application infrastructure is the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Application.html" title="twisted.application.service.Application">twisted.application.service.Application</a></code> object — an
 object which represents your application.  However, Application doesn't provide
 anything that you'd want to manipulate directly.  Instead, Application acts as
-a container of any <q>Services</q> (objects implementing <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code>) that your application
+a container of any <q>Services</q> (objects implementing <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code>) that your application
 provides.  Most of your interaction with the Application infrastructure will be
 done through Services.</p>
 
 <p>By <q>Service</q>, we mean anything in your application that can be started
 and stopped.  Typical services include web servers, FTP servers and SSH
 clients.  Your Application object can contain many services, and can even
-contain structured hierarchies of Services using <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code>s.</p>
+contain structured hierarchies of Services using <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code>s.</p>
 
 <p>Here's a simple example of constructing an Application object which
 represents an echo server that runs on TCP port 7001.</p>
@@ -103,7 +103,7 @@ Client service. </p>
 
 <p>To handle start-up and configuration of your Twisted application, the
 Twisted Application infrastructure uses <code>.tac</code> files. 
-<code>.tac</code> are Python files which configure an <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.Application.html" title="twisted.application.service.Application">Application</a></code> object and assign this
+<code>.tac</code> are Python files which configure an <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.Application.html" title="twisted.application.service.Application">Application</a></code> object and assign this
 object to the top-level variable <q><code>application</code></q>.</p>
 
 <p>The following is a simple example of a <code>.tac</code> file:</p>
@@ -217,13 +217,13 @@ replaced with use of the <code>--logfile</code> parameter to twistd).
 
 <p>
 Alternatively, the logging behavior can be customized through an API
-accessible from <code>.tac</code> files.  The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.log.ILogObserver.html" title="twisted.python.log.ILogObserver">ILogObserver</a></code> component can be
+accessible from <code>.tac</code> files.  The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.log.ILogObserver.html" title="twisted.python.log.ILogObserver">ILogObserver</a></code> component can be
 set on an Application in order to customize the default log observer that 
 <code>twistd</code> will use.
 </p>
 
 <p>
-Here is an example of how to use <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.logfile.DailyLogFile.html" title="twisted.python.logfile.DailyLogFile">DailyLogFile</a></code>, which rotates the log once
+Here is an example of how to use <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.logfile.DailyLogFile.html" title="twisted.python.logfile.DailyLogFile">DailyLogFile</a></code>, which rotates the log once
 per day.
 </p>
 
@@ -270,8 +270,8 @@ corresponds to reactor.connectTCP.  </p>
     Services which allow you to make connections and listen for connections
     on TCP ports.
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">listenTCP</a></code></li>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorTCP.connectTCP.html" title="twisted.internet.interfaces.IReactorTCP.connectTCP">connectTCP</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorTCP.listenTCP.html" title="twisted.internet.interfaces.IReactorTCP.listenTCP">listenTCP</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorTCP.connectTCP.html" title="twisted.internet.interfaces.IReactorTCP.connectTCP">connectTCP</a></code></li>
     </ul>
   </dd>
 
@@ -282,8 +282,8 @@ corresponds to reactor.connectTCP.  </p>
   <dd>
     Services which listen and make connections over UNIX sockets.
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUNIX.listenUNIX.html" title="twisted.internet.interfaces.IReactorUNIX.listenUNIX">listenUNIX</a></code></li>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUNIX.connectUNIX.html" title="twisted.internet.interfaces.IReactorUNIX.connectUNIX">connectUNIX</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUNIX.listenUNIX.html" title="twisted.internet.interfaces.IReactorUNIX.listenUNIX">listenUNIX</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUNIX.connectUNIX.html" title="twisted.internet.interfaces.IReactorUNIX.connectUNIX">connectUNIX</a></code></li>
     </ul>
   </dd>
 
@@ -293,8 +293,8 @@ corresponds to reactor.connectTCP.  </p>
 
   <dd>Services which allow you to make SSL connections and run SSL servers.
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorSSL.listenSSL.html" title="twisted.internet.interfaces.IReactorSSL.listenSSL">listenSSL</a></code></li>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorSSL.connectSSL.html" title="twisted.internet.interfaces.IReactorSSL.connectSSL">connectSSL</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorSSL.listenSSL.html" title="twisted.internet.interfaces.IReactorSSL.listenSSL">listenSSL</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorSSL.connectSSL.html" title="twisted.internet.interfaces.IReactorSSL.connectSSL">connectSSL</a></code></li>
     </ul>
   </dd>
 
@@ -304,7 +304,7 @@ corresponds to reactor.connectTCP.  </p>
 
   <dd>Services which allow you to send and receive data over UDP
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUDP.listenUDP.html" title="twisted.internet.interfaces.IReactorUDP.listenUDP">listenUDP</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUDP.listenUDP.html" title="twisted.internet.interfaces.IReactorUDP.listenUDP">listenUDP</a></code></li>
     </ul>
 
     <p>See also the <a href="udp.html" shape="rect">UDP documentation</a>.</p>
@@ -316,8 +316,8 @@ corresponds to reactor.connectTCP.  </p>
 
   <dd>Services which send and receive data over UNIX datagram sockets.
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUNIXDatagram.listenUNIXDatagram.html" title="twisted.internet.interfaces.IReactorUNIXDatagram.listenUNIXDatagram">listenUNIXDatagram</a></code></li>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUNIXDatagram.connectUNIXDatagram.html" title="twisted.internet.interfaces.IReactorUNIXDatagram.connectUNIXDatagram">connectUNIXDatagram</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUNIXDatagram.listenUNIXDatagram.html" title="twisted.internet.interfaces.IReactorUNIXDatagram.listenUNIXDatagram">listenUNIXDatagram</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUNIXDatagram.connectUNIXDatagram.html" title="twisted.internet.interfaces.IReactorUNIXDatagram.connectUNIXDatagram">connectUNIXDatagram</a></code></li>
     </ul>
   </dd>
 
@@ -326,11 +326,11 @@ corresponds to reactor.connectTCP.  </p>
   <dd>
     A server for UDP socket methods that support multicast.
     <ul>
-      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorMulticast.listenMulticast.html" title="twisted.internet.interfaces.IReactorMulticast.listenMulticast">listenMulticast</a></code></li>
+      <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorMulticast.listenMulticast.html" title="twisted.internet.interfaces.IReactorMulticast.listenMulticast">listenMulticast</a></code></li>
     </ul>
   </dd>
 
-  <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.internet.TimerService.html" title="twisted.application.internet.TimerService">TimerService</a></code></dt>
+  <dt><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.internet.TimerService.html" title="twisted.application.internet.TimerService">TimerService</a></code></dt>
 
   <dd>
     A service to periodically call a function.
@@ -340,12 +340,12 @@ corresponds to reactor.connectTCP.  </p>
 
 <h3>Service Collection<a name="auto8"/></h3>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code> objects contain 
-<code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code> objects.
-IService objects can be added to IServiceCollection by calling <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IService.setServiceParent.html" title="twisted.application.service.IService.setServiceParent">setServiceParent</a></code> and detached
-by using <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IService.disownServiceParent.html" title="twisted.application.service.IService.disownServiceParent">disownServiceParent</a></code>.</p>
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IServiceCollection.html" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code> objects contain 
+<code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IService.html" title="twisted.application.service.IService">IService</a></code> objects.
+IService objects can be added to IServiceCollection by calling <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IService.setServiceParent.html" title="twisted.application.service.IService.setServiceParent">setServiceParent</a></code> and detached
+by using <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IService.disownServiceParent.html" title="twisted.application.service.IService.disownServiceParent">disownServiceParent</a></code>.</p>
 
-<p>The standard implementation of IServiceCollection is <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.MultiService.html" title="twisted.application.service.MultiService">MultiService</a></code>, which also implements
+<p>The standard implementation of IServiceCollection is <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.MultiService.html" title="twisted.application.service.MultiService">MultiService</a></code>, which also implements
 IService.  MultiService is useful for creating a new Service which combines two
 or more existing Services.  For example, you could create a DNS Service as a
 MultiService which has a TCP and a UDP Service as children.</p>
@@ -393,6 +393,6 @@ MultiService which has a TCP and a UDP Service as children.</p>
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>
