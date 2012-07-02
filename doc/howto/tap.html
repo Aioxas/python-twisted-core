@@ -21,7 +21,7 @@ mechanism.</p>
 <p>There are a few prerequisites to understanding this document:</p>
 <ul>
   <li>A basic understanding of the Twisted Plugin System (i.e.,
-      the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> module) is
+      the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> module) is
       necessary, however, step-by-step instructions will be
       given. Reading <a href="plugin.html" shape="rect">The Twisted Plugin
       System</a> is recommended, in particular the <q>Extending an
@@ -81,15 +81,15 @@ Framework</a>.</p>
 
 <p>
   In this file, define an object which <em>provides</em> the interfaces
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.IPlugin.html" title="twisted.plugin.IPlugin">twisted.plugin.IPlugin</a></code>
-  and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.application.service.IServiceMaker.html" title="twisted.application.service.IServiceMaker">twisted.application.service.IServiceMaker</a></code>.
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.IPlugin.html" title="twisted.plugin.IPlugin">twisted.plugin.IPlugin</a></code>
+  and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.application.service.IServiceMaker.html" title="twisted.application.service.IServiceMaker">twisted.application.service.IServiceMaker</a></code>.
 </p>
 
 <p>The <code>tapname</code> attribute of your IServiceMaker provider
 will be used as the subcommand name in a command
 like <code class="shell">twistd [subcommand] [args...]</code>, and
 the <code>options</code> attribute (which should be
-a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">usage.Options</a></code>
+a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.usage.Options.html" title="twisted.python.usage.Options">usage.Options</a></code>
 subclass) will be used to parse the given args.</p>
 
 <pre class="python"><p class="py-linenumber"> 1
@@ -181,7 +181,7 @@ subclass) will be used to parse the given args.</p>
   If you are building a twistd plugin and you want to support a wide
   variety of authentication patterns, Twisted provides an easy-to-use
   mixin for your Options subclass:
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.strcred.AuthOptionMixin.html" title="twisted.cred.strcred.AuthOptionMixin">strcred.AuthOptionMixin</a></code>.
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.strcred.AuthOptionMixin.html" title="twisted.cred.strcred.AuthOptionMixin">strcred.AuthOptionMixin</a></code>.
   The following code is an example of using this mixin:
 </p>
 
@@ -296,7 +296,7 @@ $ twistd myserver --auth passwd:/etc/passwd
 </pre>
 
 <p>
-  For a full list of cred plugins supported, see <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugins.html" title="twisted.plugins">twisted.plugins</a></code>, or use the command-line help:
+  For a full list of cred plugins supported, see <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugins.html" title="twisted.plugins">twisted.plugins</a></code>, or use the command-line help:
 </p>
 
 <pre class="shell" xml:space="preserve">
@@ -318,6 +318,6 @@ $ twistd myserver --help-auth-type passwd
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

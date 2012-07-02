@@ -20,14 +20,14 @@
     <p>Since there are no connections, we only use a single object, a protocol,
     for each UDP socket. We then use the reactor to connect this protocol to a
     UDP transport, using the
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUDP.html" title="twisted.internet.interfaces.IReactorUDP">twisted.internet.interfaces.IReactorUDP</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUDP.html" title="twisted.internet.interfaces.IReactorUDP">twisted.internet.interfaces.IReactorUDP</a></code>
     reactor API.</p>
 
     <h2>DatagramProtocol<a name="auto1"/></h2>
 
     <p>The class where you actually implement the protocol parsing and handling
     will usually be descended
-    from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.DatagramProtocol.html" title="twisted.internet.protocol.DatagramProtocol">twisted.internet.protocol.DatagramProtocol</a></code> or
+    from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.DatagramProtocol.html" title="twisted.internet.protocol.DatagramProtocol">twisted.internet.protocol.DatagramProtocol</a></code> or
     from one of its convenience children. The <code>DatagramProtocol</code>
     class receives datagrams and can send them out over the network. Received
     datagrams include the address they were sent from. When sending datagrams
@@ -60,15 +60,15 @@
 
     <p>As you can see, the protocol is registered with the reactor. This means
     it may be persisted if it's added to an application, and thus it has
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.AbstractDatagramProtocol.startProtocol.html" title="twisted.internet.protocol.AbstractDatagramProtocol.startProtocol">startProtocol</a></code>
-    and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.AbstractDatagramProtocol.stopProtocol.html" title="twisted.internet.protocol.AbstractDatagramProtocol.stopProtocol">stopProtocol</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.AbstractDatagramProtocol.startProtocol.html" title="twisted.internet.protocol.AbstractDatagramProtocol.startProtocol">startProtocol</a></code>
+    and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.AbstractDatagramProtocol.stopProtocol.html" title="twisted.internet.protocol.AbstractDatagramProtocol.stopProtocol">stopProtocol</a></code>
     methods that will get called when the protocol is connected and disconnected
     from a UDP socket.</p>
 
     <p>The protocol's <code class="python">transport</code> attribute will
-    implement the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IUDPTransport.html" title="twisted.internet.interfaces.IUDPTransport">twisted.internet.interfaces.IUDPTransport</a></code> interface.
+    implement the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IUDPTransport.html" title="twisted.internet.interfaces.IUDPTransport">twisted.internet.interfaces.IUDPTransport</a></code> interface.
     Notice that the <code class="python">host</code> argument should be an
-    IP address, not a hostname. If you only have the hostname use <code class="python">reactor.resolve()</code> to resolve the address (see <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorCore.resolve.html" title="twisted.internet.interfaces.IReactorCore.resolve">twisted.internet.interfaces.IReactorCore.resolve</a></code>).</p>
+    IP address, not a hostname. If you only have the hostname use <code class="python">reactor.resolve()</code> to resolve the address (see <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorCore.resolve.html" title="twisted.internet.interfaces.IReactorCore.resolve">twisted.internet.interfaces.IReactorCore.resolve</a></code>).</p>
 
 
     <h2>Connected UDP<a name="auto2"/></h2>
@@ -235,10 +235,10 @@
 
     <p>As with UDP, with multicast there is no server/client differentiation
     at the protocol level. Our server example is very simple and closely
-    resembles a normal <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorUDP.listenUDP.html" title="twisted.internet.interfaces.IReactorUDP.listenUDP">listenUDP</a></code>
+    resembles a normal <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorUDP.listenUDP.html" title="twisted.internet.interfaces.IReactorUDP.listenUDP">listenUDP</a></code>
     protocol implementation.  The main difference is that instead
-    of <code>listenUDP</code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IReactorMulticast.listenMulticast.html" title="twisted.internet.interfaces.IReactorMulticast.listenMulticast">listenMulticast</a></code>
-    is called with the port number. The server calls <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IMulticastTransport.joinGroup.html" title="twisted.internet.interfaces.IMulticastTransport.joinGroup">joinGroup</a></code> to
+    of <code>listenUDP</code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IReactorMulticast.listenMulticast.html" title="twisted.internet.interfaces.IReactorMulticast.listenMulticast">listenMulticast</a></code>
+    is called with the port number. The server calls <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IMulticastTransport.joinGroup.html" title="twisted.internet.interfaces.IMulticastTransport.joinGroup">joinGroup</a></code> to
     join a multicast group. A <code class="python">DatagramProtocol</code>
     that is listening with multicast and has joined a group can receive
     multicast datagrams, but also unicast datagrams sent directly to its
@@ -289,16 +289,16 @@
     <p>Note that a multicast socket will have a default TTL (time to live) of
     1. That is, datagrams won't traverse more than one router hop, unless a
     higher TTL is set with
-     <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IMulticastTransport.setTTL.html" title="twisted.internet.interfaces.IMulticastTransport.setTTL">setTTL</a></code>. Other
+     <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IMulticastTransport.setTTL.html" title="twisted.internet.interfaces.IMulticastTransport.setTTL">setTTL</a></code>. Other
     functionality provided by the multicast transport
-    includes <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IMulticastTransport.setOutgoingInterface.html" title="twisted.internet.interfaces.IMulticastTransport.setOutgoingInterface">setOutgoingInterface</a></code>
-    and <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IMulticastTransport.setLoopbackMode.html" title="twisted.internet.interfaces.IMulticastTransport.setLoopbackMode">setLoopbackMode</a></code>
-    -- see <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IMulticastTransport.html" title="twisted.internet.interfaces.IMulticastTransport">IMulticastTransport</a></code> for more
+    includes <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IMulticastTransport.setOutgoingInterface.html" title="twisted.internet.interfaces.IMulticastTransport.setOutgoingInterface">setOutgoingInterface</a></code>
+    and <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IMulticastTransport.setLoopbackMode.html" title="twisted.internet.interfaces.IMulticastTransport.setLoopbackMode">setLoopbackMode</a></code>
+    -- see <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IMulticastTransport.html" title="twisted.internet.interfaces.IMulticastTransport">IMulticastTransport</a></code> for more
     information.</p>
 
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

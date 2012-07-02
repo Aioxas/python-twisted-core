@@ -12,14 +12,14 @@
 
 <h2>dirdbm.DirDBM<a name="auto0"/></h2>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">twisted.persisted.dirdbm.DirDBM</a></code> is a DBM-like storage system. 
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">twisted.persisted.dirdbm.DirDBM</a></code> is a DBM-like storage system. 
 That is, it stores mappings between keys
 and values, like a Python dictionary, except that it stores the values in files
 in a directory - each entry is a different file. The keys must always be strings,
-as are the values. Other than that, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">DirDBM</a></code>
+as are the values. Other than that, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">DirDBM</a></code>
 objects act just like Python dictionaries.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">DirDBM</a></code> is useful for cases
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.persisted.dirdbm.DirDBM.html" title="twisted.persisted.dirdbm.DirDBM">DirDBM</a></code> is useful for cases
 when you want to store small amounts of data in an organized fashion, without having
 to deal with the complexity of a RDBMS or other sophisticated database. It is simple,
 easy to use, cross-platform, and doesn't require any external C libraries, unlike
@@ -41,7 +41,7 @@ Python's built-in DBM modules.</p>
 <h2>dirdbm.Shelf<a name="auto1"/></h2>
 
 <p>Sometimes it is neccessary to persist more complicated objects than strings.
-With some care, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.persisted.dirdbm.Shelf.html" title="twisted.persisted.dirdbm.Shelf">dirdbm.Shelf</a></code>
+With some care, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.persisted.dirdbm.Shelf.html" title="twisted.persisted.dirdbm.Shelf">dirdbm.Shelf</a></code>
 can transparently persist
 them. <code>Shelf</code> works exactly like <code>DirDBM</code>, except that
 the values (but not the keys) can be arbitrary picklable objects. However,
@@ -71,6 +71,6 @@ afterwards:</p>
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

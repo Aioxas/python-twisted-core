@@ -33,7 +33,7 @@ sandwich-related puns) is based upon a few central concepts:</p>
 
   <li><em>remote method calls</em>: doing something to a local object and
   causing a method to get run on a distant one. The local object is called a
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>, and you
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>, and you
   <q>do something</q> by running its <code>.callRemote</code> method.
   </li>
 
@@ -54,13 +54,13 @@ out through their interaction than explaining them one at a time.</p>
 
 <ul>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">Factory</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.protocol.Factory.html" title="twisted.internet.protocol.Factory">Factory</a></code>
   : <code>internet/protocol.py</code></li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.PBServerFactory.html" title="twisted.spread.pb.PBServerFactory">PBServerFactory</a></code>
   : <code>spread/pb.py</code></li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Broker.html" title="twisted.spread.pb.Broker">Broker</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Broker.html" title="twisted.spread.pb.Broker">Broker</a></code>
   : <code>spread/pb.py</code></li>
 
 </ul>
@@ -69,15 +69,15 @@ out through their interaction than explaining them one at a time.</p>
 
 <ul>
 
-  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>
+  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code>
   : <code>spread/pb.py</code> </li>
 
-  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>
+  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>
   : <code>spread/pb.py</code>, actually defined as
   <code>twisted.spread.flavors.Root</code>
   in <code>spread/flavors.py</code> </li>
 
-  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>
+  <li> <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>
   : <code>spread/pb.py</code>, actually defined as
   <code>twisted.spread.flavors.Referenceable</code>
   in <code>spread/flavors.py</code> </li>
@@ -88,15 +88,15 @@ out through their interaction than explaining them one at a time.</p>
 about authorization and security:</p>
 
 <ul>
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.Portal.html" title="twisted.cred.portal.Portal">Portal</a></code>
   : <code>cred/portal.py</code></li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.portal.IRealm.html" title="twisted.cred.portal.IRealm">IRealm</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.portal.IRealm.html" title="twisted.cred.portal.IRealm">IRealm</a></code>
   : <code>cred/portal.py</code></li>
   
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.IPerspective.html" title="twisted.spread.pb.IPerspective">IPerspective</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.IPerspective.html" title="twisted.spread.pb.IPerspective">IPerspective</a></code>
   : <code>spread/pb.py</code>, which you will usually be interacting
-  with via <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Avatar.html" title="twisted.spread.pb.Avatar">pb.Avatar</a></code> (a basic implementor of the interface).</li>
+  with via <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Avatar.html" title="twisted.spread.pb.Avatar">pb.Avatar</a></code> (a basic implementor of the interface).</li>
 </ul>
 
 <h3>Subclassing and Implementing<a name="auto2"/></h3>
@@ -110,17 +110,17 @@ get started:</p>
 
 <ul>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>: you'll
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code>, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">pb.Referenceable</a></code>: you'll
   subclass these to make remotely-referenceable objects (i.e., objects
   which you can call methods on remotely) using PB. You don't need to
   change any of the existing behavior, just inherit all of it and add
   the remotely-accessible methods that you want to export.</li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Avatar.html" title="twisted.spread.pb.Avatar">pb.Avatar</a></code>: You'll
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Avatar.html" title="twisted.spread.pb.Avatar">pb.Avatar</a></code>: You'll
   be subclassing this when you get into PB programming with
   authorization. This is an implementor of IPerspective.</li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.cred.checkers.ICredentialsChecker.html" title="twisted.cred.checkers.ICredentialsChecker">ICredentialsChecker</a></code>: Implement this if
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.cred.checkers.ICredentialsChecker.html" title="twisted.cred.checkers.ICredentialsChecker">ICredentialsChecker</a></code>: Implement this if
   you want to authenticate your users against some sort of data store:
   i.e., an LDAP database, an RDBMS, etc. There are already a few
   implementations of this for various back-ends in
@@ -133,14 +133,14 @@ get started:</p>
 <h2>Things you can Call Remotely<a name="auto3"/></h2>
 
 <p>At this writing, there are three <q>flavors</q> of objects that can
-be accessed remotely through <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> objects. Each of these
+be accessed remotely through <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteReference.html" title="twisted.spread.pb.RemoteReference">RemoteReference</a></code> objects. Each of these
 flavors has a rule for how the <code class="python">callRemote</code>
 message is transformed into a local method call on the server.  In
 order to use one of these <q>flavors</q>, subclass them and name your
 published methods with the appropriate prefix.
 
 <ul>
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.IPerspective.html" title="twisted.spread.pb.IPerspective">twisted.spread.pb.IPerspective</a></code> implementors
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.IPerspective.html" title="twisted.spread.pb.IPerspective">twisted.spread.pb.IPerspective</a></code> implementors
 
   <p>This is the first interface we deal with. It is a <q>perspective</q>
   onto your PB application.  Perspectives are slightly special because
@@ -165,7 +165,7 @@ published methods with the appropriate prefix.
 
   </li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">twisted.spread.pb.Referenceable</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Referenceable.html" title="twisted.spread.pb.Referenceable">twisted.spread.pb.Referenceable</a></code>
 
   <p>Referenceable objects are the simplest kind of PB object.  You can call
   methods on them and return them from methods to provide access to other
@@ -179,7 +179,7 @@ published methods with the appropriate prefix.
 
   </li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Viewable.html" title="twisted.spread.pb.Viewable">twisted.spread.pb.Viewable</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Viewable.html" title="twisted.spread.pb.Viewable">twisted.spread.pb.Viewable</a></code>
 
   <p>Viewable objects are remotely referenceable objects which have the
   additional requirement that it must be possible to tell who is calling them.
@@ -208,13 +208,13 @@ flavor.</p>
 
 <p>
 <ul>
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">twisted.spread.pb.Copyable</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">twisted.spread.pb.Copyable</a></code>
 
   <p>This is the simpler kind of object that can be copied.  Every time this
   object is returned from a method or passed as an argument, it is serialized
   and unserialized.</p>
 
-  <p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">Copyable</a></code>
+  <p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Copyable.html" title="twisted.spread.pb.Copyable">Copyable</a></code>
   provides a method you can override, <code class="py-prototype">getStateToCopyFor(perspective)</code>, which
   allows you to decide what an object will look like for the
   perspective who is requesting it. The <code class="python">perspective</code> argument will be the perspective
@@ -249,7 +249,7 @@ flavor.</p>
 
   </li>
 
-  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">twisted.spread.pb.Cacheable</a></code>
+  <li><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">twisted.spread.pb.Cacheable</a></code>
 
   <p>Let me preface this with a warning: Cacheable may be hard to understand.
   The motivation for it may be unclear if you don't have some experience with
@@ -279,13 +279,13 @@ flavor.</p>
   perspective.  It also gets passed an
   <code class="python">observer</code>, which is a remote reference to a
   <q>secret</q> fourth referenceable flavor:
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">RemoteCache</a></code>.</p>
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">RemoteCache</a></code>.</p>
 
-  <p>A <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">RemoteCache</a></code> is simply
+  <p>A <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCache.html" title="twisted.spread.pb.RemoteCache">RemoteCache</a></code> is simply
   the object that represents your
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code> on the other side
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code> on the other side
   of the connection.  It is registered using the same method as
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">RemoteCopy</a></code>, above.
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.RemoteCopy.html" title="twisted.spread.pb.RemoteCopy">RemoteCopy</a></code>, above.
   RemoteCache is different, however, in that it will be referenced by its peer.
   It acts as a Referenceable, where all methods prefixed with
   <code class="python">observe_</code> will be callable remotely.  It is
@@ -295,11 +295,11 @@ flavor.</p>
   that should be noticeable to its clients.  </p>
 
   <p>Finally, when all references to a
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code> from a given
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code> from a given
   perspective are lost,
   <code class="py-prototype">stoppedObserving(perspective, observer)</code>
   will be called on the
-  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code>, with the same
+  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Cacheable.html" title="twisted.spread.pb.Cacheable">Cacheable</a></code>, with the same
   perspective/observer pair that <code>getStateToCacheAndObserveFor</code> was
   originally called with.  Any cleanup remote calls can be made there, as well
   as removing the observer object from any lists which it was previously in.
@@ -315,6 +315,6 @@ advantage of the tool they created to solve the same problem you're facing
 now.</span></a></li></ol></div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

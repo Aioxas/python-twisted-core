@@ -14,7 +14,7 @@
 
     <p>Twisted is an asynchronous networking framework, but most
     database API implementations unfortunately have blocking
-    interfaces -- for this reason, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">twisted.enterprise.adbapi</a></code> was created. It is
+    interfaces -- for this reason, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">twisted.enterprise.adbapi</a></code> was created. It is
     a non-blocking interface to the standardized DB-API 2.0 API,
     which allows you to access a number of different RDBMSes.</p>
 
@@ -59,11 +59,11 @@
 
     <p>Those delays are unacceptable when using an asynchronous
     framework such as Twisted. For this reason, twisted provides
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">twisted.enterprise.adbapi</a></code>, an
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">twisted.enterprise.adbapi</a></code>, an
     asynchronous wrapper for any <a href="http://www.python.org/dev/peps/pep-0249/" shape="rect">
     DB-API 2.0</a>-compliant module.</p>
 
-    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">enterprise.adbapi</a></code> will do
+    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">enterprise.adbapi</a></code> will do
     blocking
     database operations in separate threads, which trigger
     callbacks in the originating thread when they complete. In the
@@ -73,9 +73,9 @@
     <h2>How do I use adbapi?<a name="auto3"/></h2>
 
     <p>Rather than creating a database connection directly, use the
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>
     class to manage
-    a connections for you. This allows <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">enterprise.adbapi</a></code> to use multiple
+    a connections for you. This allows <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.html" title="twisted.enterprise.adbapi">enterprise.adbapi</a></code> to use multiple
     connections, one per thread. This is easy:</p>
 <pre class="python"><p class="py-linenumber">1
 2
@@ -89,10 +89,10 @@
 
     <ul>
       <li>There is no need to import dbmodule directly. You just
-      pass the name to <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>'s constructor.</li>
+      pass the name to <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>'s constructor.</li>
 
       <li>The parameters you would pass to dbmodule.connect are
-      passed as extra arguments to <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>'s constructor.
+      passed as extra arguments to <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.ConnectionPool.html" title="twisted.enterprise.adbapi.ConnectionPool">adbapi.ConnectionPool</a></code>'s constructor.
       Keyword parameters work as well.</li>
     </ul>
 
@@ -123,13 +123,13 @@
 </pre>
 
     <p>This is straightforward, except perhaps for the return value
-    of <code>getAge</code>. It returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code>, which allows
+    of <code>getAge</code>. It returns a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code>, which allows
     arbitrary callbacks to be called upon completion (or upon
     failure).  More documentation on Deferred is available <a href="defer.html" shape="rect">here</a>.</p>
 
     <p>In addition to <code>runQuery</code>, there is also <code>runOperation</code>,
     and <code>runInteraction</code> that gets called with a callable (e.g. a function).
-    The function will be called in the thread with a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.enterprise.adbapi.Transaction.html" title="twisted.enterprise.adbapi.Transaction">twisted.enterprise.adbapi.Transaction</a></code>,
+    The function will be called in the thread with a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.enterprise.adbapi.Transaction.html" title="twisted.enterprise.adbapi.Transaction">twisted.enterprise.adbapi.Transaction</a></code>,
     which basically mimics a DB-API cursor. In all cases a database transaction will be 
     commited after your database usage is finished, unless an exception is raised in
     which case it will be rolled back.</p>
@@ -223,6 +223,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

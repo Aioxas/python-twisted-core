@@ -6,7 +6,7 @@
 
   <body bgcolor="white">
     <h1 class="title">Twisted code examples</h1>
-    <div class="toc"><ol><li><a href="#auto0">Simple Echo server and client</a></li><li><a href="#auto1">Chat</a></li><li><a href="#auto2">Echo server &amp; client variants</a></li><li><a href="#auto3">AMP server &amp; client variants</a></li><li><a href="#auto4">Perspective Broker</a></li><li><a href="#auto5">Cred</a></li><li><a href="#auto6">GUI</a></li><li><a href="#auto7">FTP examples</a></li><li><a href="#auto8">Logging</a></li><li><a href="#auto9">Miscellaneous</a></li></ol></div>
+    <div class="toc"><ol><li><a href="#auto0">Simple Echo server and client</a></li><li><a href="#auto1">Chat</a></li><li><a href="#auto2">Echo server &amp; client variants</a></li><li><a href="#auto3">AMP server &amp; client variants</a></li><li><a href="#auto4">Perspective Broker</a></li><li><a href="#auto5">Cred</a></li><li><a href="#auto6">GUI</a></li><li><a href="#auto7">FTP examples</a></li><li><a href="#auto8">Logging</a></li><li><a href="#auto9">POSIX Specific Tricks</a></li><li><a href="#auto10">Miscellaneous</a></li></ol></div>
     <div class="content">
     <span/>
 
@@ -42,7 +42,7 @@
     <h2>Perspective Broker<a name="auto4"/></h2>
     <ul>
         <li><a href="pbsimple.py" shape="rect">pbsimple.py</a> - simplest possible PB server</li>
-        <li><a href="pbsimpleclient.py" shape="rect">pbsimpleclient.py</a> - simplest possible PB 
+        <li><a href="pbsimpleclient.py" shape="rect">pbsimpleclient.py</a> - simplest possible PB
         client</li>
         <li><a href="pbbenchclient.py" shape="rect">pbbenchclient.py</a> - benchmarking client</li>
         <li><a href="pbbenchserver.py" shape="rect">pbbenchserver.py</a> - benchmarking server</li>
@@ -78,14 +78,21 @@
 
     <h2>Logging<a name="auto8"/></h2>
     <ul>
-        <li><a href="twistd-logging.tac" shape="rect">twistd-logging.tac</a> - logging example using 
+        <li><a href="twistd-logging.tac" shape="rect">twistd-logging.tac</a> - logging example using
         ILogObserver</li>
-        <li><a href="testlogging.py" shape="rect">testlogging.py</a> - use twisted.python.log to log errors to 
-	standard out</li>
+        <li><a href="testlogging.py" shape="rect">testlogging.py</a> - use twisted.python.log to log errors to
+        standard out</li>
         <li><a href="rotatinglog.py" shape="rect">rotatinglog.py</a> - example of log file rotation</li>
     </ul>
 
-    <h2>Miscellaneous<a name="auto9"/></h2>
+    <h2>POSIX Specific Tricks<a name="auto9"/></h2>
+    <ul>
+      <li><a href="sendfd.py" shape="rect">sendfd.py</a>, <a href="recvfd.py" shape="rect">recvfd.py</a> - send and receive
+      file descriptors over UNIX domain sockets
+      </li>
+    </ul>
+
+    <h2>Miscellaneous<a name="auto10"/></h2>
     <ul>
         <li><a href="shaper.py" shape="rect">shaper.py</a> - example of rate-limiting your web server</li>
         <li><a href="stdiodemo.py" shape="rect">stdiodemo.py</a> - example using stdio, Deferreds, LineReceiver
@@ -101,7 +108,7 @@
         <li><a href="stdin.py" shape="rect">stdin.py</a> - reading a line at a time from standard input
         without blocking the reactor</li>
         <li><a href="streaming.py" shape="rect">streaming.py</a> - example of a push producer/consumer system</li>
-        <li><a href="filewatch.py" shape="rect">filewatch.py</a> - write the content of a file to standard out 
+        <li><a href="filewatch.py" shape="rect">filewatch.py</a> - write the content of a file to standard out
         one line at a time</li>
         <li><a href="shoutcast.py" shape="rect">shoutcast.py</a> - example Shoutcast client</li>
         <li><a href="gpsfix.py" shape="rect">gpsfix.py</a> - example using the SerialPort transport and GPS
@@ -109,10 +116,10 @@
         <li><a href="wxacceptance.py" shape="rect">wxacceptance.py</a> - acceptance tests for wxreactor</li>
         <li><a href="postfix.py" shape="rect">postfix.py</a> - test application for PostfixTCPMapServer</li>
     </ul>
-    
+
 </div>
 
     <p><a href="../howto/index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

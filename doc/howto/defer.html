@@ -11,7 +11,7 @@
 
 <span/>
 
-<p>This document is a guide to the behaviour of the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code> object, and to various
+<p>This document is a guide to the behaviour of the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code> object, and to various
 ways you can use them when they are returned by functions.</p>
 
 <p>This document assumes that you are familiar with the basic principle that
@@ -36,7 +36,7 @@ code.</li>
 <a name="deferreds" shape="rect"/>
 <h2>Deferreds<a name="auto0"/></h2>
 
-<p>Twisted uses the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> object to manage the callback
+<p>Twisted uses the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">Deferred</a></code> object to manage the callback
 sequence. The client application attaches a series of functions to the
 deferred to be called in order when the results of the asychronous request are
 available (this series of functions is known as a series of 
@@ -49,7 +49,7 @@ callback or errback function to the next function in the chain.</p>
 
 <h2>Callbacks<a name="auto1"/></h2>
 
-<p>A <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code> is a promise that
+<p>A <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.html" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code> is a promise that
 a function will at some point have a result.  We can attach callback functions
 to a Deferred, and once it gets a result these callbacks will be called. In
 addition Deferreds allow the developer to register a callback for an error,
@@ -280,7 +280,7 @@ case of errors or exceptions.</p>
   <li>When the result is ready, give it to the Deferred
   object. <code>.callback(result)</code> if the operation succeeded,
   <code>.errback(failure)</code> if it failed. Note that
-  <code>failure</code> is typically an instance of a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code>
+  <code>failure</code> is typically an instance of a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code>
   instance.</li>
   
   <li>Deferred object triggers previously-added (call/err)back
@@ -302,7 +302,7 @@ case of errors or exceptions.</p>
     statements.</li>
     
     <li>If an errback doesn't raise an exception or return a
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code>
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code>
     instance, switch to callback.</li>
   </ul> </li>
 </ol>
@@ -315,7 +315,7 @@ exception handling. In the case that no errors occur, all the
 callbacks run, one after the other, as described above.</p>
 
 <p>If the errback is called instead of the callback (e.g.  because a DB query
-raised an error), then a <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code> is passed into the first
+raised an error), then a <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code> is passed into the first
 errback (you can add multiple errbacks, just like with callbacks). You can
 think of your errbacks as being like <code class="python">except</code> blocks
 of ordinary Python code.</p>
@@ -334,7 +334,7 @@ to be executed after this errback.  This may not be what you expect to happen,
 so be careful. Make sure your errbacks return a <code class="python">Failure</code> (probably the one that was passed to it), or a
 meaningful return value for the next callback.</p>
 
-<p>Also, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code> instances have
+<p>Also, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.failure.Failure.html" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code> instances have
 a useful method called trap, allowing you to effectively do the equivalent
 of:</p>
 
@@ -372,7 +372,7 @@ match the error encapsulated in that <code class="python">Failure</code>, then
 it re-raises the error.</p>
 
 <p>There's another potential <q>gotcha</q> here.  There's a
-method <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.Deferred.addCallbacks.html" title="twisted.internet.defer.Deferred.addCallbacks">twisted.internet.defer.Deferred.addCallbacks</a></code>
+method <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.Deferred.addCallbacks.html" title="twisted.internet.defer.Deferred.addCallbacks">twisted.internet.defer.Deferred.addCallbacks</a></code>
 which is similar to, but not exactly the same as, <code class="python">addCallback</code> followed by <code class="python">addErrback</code>. In particular, consider these two cases:</p>
 
 <pre class="python"><p class="py-linenumber"> 1
@@ -515,7 +515,7 @@ a Deferred:
 
 <p> Our original implementation of <code>authenticateUser</code> expected  <code>isValidUser</code> to be synchronous, but now we need to change it to handle both
 synchronous and asynchronous implementations of <code>isValidUser</code>. For this, we
-use <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.maybeDeferred.html" title="twisted.internet.defer.maybeDeferred">maybeDeferred</a></code> to
+use <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.maybeDeferred.html" title="twisted.internet.defer.maybeDeferred">maybeDeferred</a></code> to
 call <code>isValidUser</code>, ensuring that the result of <code>isValidUser</code> is a Deferred,
 even if <code>isValidUser</code> is a synchronous function:
 </p>
@@ -557,7 +557,7 @@ information.</p>
 
 <p>Sometimes you want to be notified after several different events have all
 happened, rather than waiting for each one individually.  For example, you may
-want to wait for all the connections in a list to close.  <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.DeferredList.html" title="twisted.internet.defer.DeferredList">twisted.internet.defer.DeferredList</a></code> is the way to do
+want to wait for all the connections in a list to close.  <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.DeferredList.html" title="twisted.internet.defer.DeferredList">twisted.internet.defer.DeferredList</a></code> is the way to do
 this.</p>
 
 <p>To create a DeferredList from multiple Deferreds, you simply pass a list of
@@ -736,7 +736,7 @@ for the <code>consumeErrors</code> parameter will not change the behavior of <co
 
 <p>A common use for DeferredList is to &quot;join&quot; a number of parallel asynchronous
 operations, finishing successfully if all of the operations were successful, or
-failing if any one of the operations fails.  In this case, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.defer.gatherResults.html" title="twisted.internet.defer.gatherResults">twisted.internet.defer.gatherResults</a></code> is a useful
+failing if any one of the operations fails.  In this case, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.defer.gatherResults.html" title="twisted.internet.defer.gatherResults">twisted.internet.defer.gatherResults</a></code> is a useful
 shortcut:</p>
 
 <pre class="python"><p class="py-linenumber"> 1
@@ -893,6 +893,6 @@ but as we've already noted, adding callbacks to a Deferred after its used in a
 DeferredList is confusing and usually avoided.</span></a></li></ol></div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

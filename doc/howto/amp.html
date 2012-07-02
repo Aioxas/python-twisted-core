@@ -10,13 +10,13 @@
     <div class="content">
     <span/>
 
-    <p>The purpose of this guide is to describe the uses for and usage of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.protocols.amp.html" title="twisted.protocols.amp">twisted.protocols.amp</a></code> beyond what is explained in the API documentation.  It will show you how to implement an AMP server which can respond to commands or interact directly with individual messages.  It will also show you how to implement an AMP client which can issue commands to a server.</p>
+    <p>The purpose of this guide is to describe the uses for and usage of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.protocols.amp.html" title="twisted.protocols.amp">twisted.protocols.amp</a></code> beyond what is explained in the API documentation.  It will show you how to implement an AMP server which can respond to commands or interact directly with individual messages.  It will also show you how to implement an AMP client which can issue commands to a server.</p>
 
     <p>AMP is a bidirectional command/response-oriented protocol intended to be extended with application-specific request types and handlers.  Various simple data types are supported and support for new data types can be added by applications.</p>
 
     <h2>Setting Up<a name="auto0"/></h2>
 
-    <p>AMP runs over a stream-oriented connection-based protocol, such as TCP or SSL.  Before you can use any features of the AMP protocol, you need a connection.  The protocol class to use to establish an AMP connection is <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.protocols.amp.AMP.html" title="twisted.protocols.amp.AMP">AMP</a></code>.  Connection setup works as it does for almost all protocols in Twisted.  For example, you can set up a listening AMP server using a server endpoint:</p>
+    <p>AMP runs over a stream-oriented connection-based protocol, such as TCP or SSL.  Before you can use any features of the AMP protocol, you need a connection.  The protocol class to use to establish an AMP connection is <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.protocols.amp.AMP.html" title="twisted.protocols.amp.AMP">AMP</a></code>.  Connection setup works as it does for almost all protocols in Twisted.  For example, you can set up a listening AMP server using a server endpoint:</p>
 
     <div class="py-listing"><pre><p class="py-linenumber"> 1
  2
@@ -113,7 +113,7 @@
 
     <h2>Commands<a name="auto1"/></h2>
 
-    <p>Either side of an AMP connection can issue a command to the other side.  Each kind of command is represented as a subclass of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.protocols.amp.Command.html" title="twisted.protocols.amp.Command">Command</a></code>.  A <code>Command</code> defines arguments, response values, and error conditions.</p>
+    <p>Either side of an AMP connection can issue a command to the other side.  Each kind of command is represented as a subclass of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.protocols.amp.Command.html" title="twisted.protocols.amp.Command">Command</a></code>.  A <code>Command</code> defines arguments, response values, and error conditions.</p>
 
     <pre class="python"><p class="py-linenumber"> 1
  2
@@ -344,6 +344,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

@@ -16,7 +16,7 @@
     extensibility is achieved through the definition of one or more
     APIs and a mechanism for collecting code plugins which
     implement this API to provide some additional functionality.
-    At the base of this system is the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> module.</p>
+    At the base of this system is the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> module.</p>
 
     <p>Making an application extensible using the plugin system has
     several strong advantages over other techniques:</p>
@@ -35,7 +35,7 @@
 
     <h2>Writing Extensible Programs<a name="auto0"/></h2>
 
-    <p>Taking advantage of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> is
+    <p>Taking advantage of <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.html" title="twisted.plugin">twisted.plugin</a></code> is
     a two step process:</p>
 
     <ol>
@@ -57,7 +57,7 @@
       </li>
 
       <li>
-      At one or more places in your program, invoke <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.getPlugins.html" title="twisted.plugin.getPlugins">twisted.plugin.getPlugins</a></code> and iterate over its
+      At one or more places in your program, invoke <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.getPlugins.html" title="twisted.plugin.getPlugins">twisted.plugin.getPlugins</a></code> and iterate over its
       result.
       </li>
     </ol>
@@ -193,7 +193,7 @@
 </pre>
 
     <p><code>steelPlate</code> and <code>brassPlate</code> now provide both
-    <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.IPlugin.html" title="twisted.plugin.IPlugin">IPlugin</a></code> and <code>IMaterial</code>.
+    <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.IPlugin.html" title="twisted.plugin.IPlugin">IPlugin</a></code> and <code>IMaterial</code>.
     All that remains is to make this module available at an appropriate
     location. For this, there are two options. The first of these is
     primarily useful during development: if a directory which
@@ -215,7 +215,7 @@
 
     <h2>Alternate Plugin Packages<a name="auto2"/></h2>
 
-    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.plugin.getPlugins.html" title="twisted.plugin.getPlugins">getPlugins</a></code> takes one
+    <p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.plugin.getPlugins.html" title="twisted.plugin.getPlugins">getPlugins</a></code> takes one
     additional argument not mentioned above.  If passed in, the 2nd argument
     should be a module or package to be used instead of
     <code>twisted.plugins</code> as the plugin meta-package.  If you
@@ -289,6 +289,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

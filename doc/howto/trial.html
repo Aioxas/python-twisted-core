@@ -6,7 +6,7 @@
 
   <body bgcolor="white">
     <h1 class="title">Test-driven development with Twisted</h1>
-    <div class="toc"><ol><li><a href="#auto0">Introductory example of Python unit testing</a></li><li><a href="#auto1">Creating an API and writing tests</a></li><li><a href="#auto2">Making the tests pass</a></li><ul><li><a href="#auto3">Factoring out common test logic</a></li></ul><li><a href="#auto4">Twisted specific testing</a></li><li><a href="#auto5">Testing a protocol</a></li><ul><li><a href="#auto6">Creating and testing the server</a></li><li><a href="#auto7">Creating and testing the client</a></li></ul><li><a href="#auto8">More good pratices</a></li><ul><li><a href="#auto9">Testing scheduling</a></li><li><a href="#auto10">Cleaning up after tests</a></li><li><a href="#auto11">Handling logged errors</a></li></ul><li><a href="#auto12">Resolve a bug</a></li><li><a href="#auto13">Code coverage</a></li><li><a href="#auto14">Conclusion</a></li></ol></div>
+    <div class="toc"><ol><li><a href="#auto0">Introductory example of Python unit testing</a></li><li><a href="#auto1">Creating an API and writing tests</a></li><li><a href="#auto2">Making the tests pass</a></li><ul><li><a href="#auto3">Factoring out common test logic</a></li></ul><li><a href="#auto4">Twisted specific testing</a></li><li><a href="#auto5">Testing a protocol</a></li><ul><li><a href="#auto6">Creating and testing the server</a></li><li><a href="#auto7">Creating and testing the client</a></li></ul><li><a href="#auto8">More good practices</a></li><ul><li><a href="#auto9">Testing scheduling</a></li><li><a href="#auto10">Cleaning up after tests</a></li><li><a href="#auto11">Handling logged errors</a></li></ul><li><a href="#auto12">Resolve a bug</a></li><li><a href="#auto13">Code coverage</a></li><li><a href="#auto14">Conclusion</a></li></ol></div>
     <div class="content">
 
 <span/>
@@ -22,8 +22,8 @@ referred to as Test-Driven Development
 Most Twisted code is tested using TDD.</p>
 
 <p>To gain a solid understanding of unit testing in Python, you should read
-the <a href="http://docs.python.org/lib/module-unittest.html" shape="rect">unittest --
-Unit testing framework chapter</a> of the <a href="http://docs.python.org/lib/lib.html" shape="rect">Python Library
+the <a href="http://docs.python.org/library/unittest.html" shape="rect">unittest --
+Unit testing framework chapter</a> of the <a href="http://docs.python.org/library/index.html" shape="rect">Python Library
 Reference</a>. There is also a ton of information available online and in
 books.</p>
 
@@ -652,7 +652,7 @@ our API class. This brings us to <code class="py-filename">calculus/base_3.py</c
         <span class="py-src-keyword">try</span>:
             <span class="py-src-keyword">return</span> <span class="py-src-variable">map</span>(<span class="py-src-variable">int</span>, <span class="py-src-variable">args</span>)
         <span class="py-src-keyword">except</span> <span class="py-src-variable">ValueError</span>:
-            <span class="py-src-keyword">raise</span> <span class="py-src-variable">TypeError</span>(<span class="py-src-string">&quot;Coudln't coerce arguments to integers: %s&quot;</span> % <span class="py-src-variable">args</span>)
+            <span class="py-src-keyword">raise</span> <span class="py-src-variable">TypeError</span>(<span class="py-src-string">&quot;Couldn't coerce arguments to integers: %s&quot;</span> % <span class="py-src-variable">args</span>)
 
     <span class="py-src-keyword">def</span> <span class="py-src-identifier">add</span>(<span class="py-src-parameter">self</span>, <span class="py-src-parameter">a</span>, <span class="py-src-parameter">b</span>):
         <span class="py-src-variable">a</span>, <span class="py-src-variable">b</span> = <span class="py-src-variable">self</span>.<span class="py-src-variable">_make_ints</span>(<span class="py-src-variable">a</span>, <span class="py-src-variable">b</span>)
@@ -685,7 +685,7 @@ goes wrong.</div></p>
 
 <p>Up to this point we've been doing fairly standard Python unit testing.
 With only a few cosmetic changes (most importantly, directly importing
- <code class="python">unittest</code> instead of using Twisted's <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.trial.unittest.html" title="twisted.trial.unittest">unittest</a></code> version) we could make the
+ <code class="python">unittest</code> instead of using Twisted's <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.trial.unittest.html" title="twisted.trial.unittest">unittest</a></code> version) we could make the
 above tests run using Python's standard library unit testing framework.</p>
 
 <p>Here we will assume a basic familiarity with Twisted's network I/O, timing,
@@ -786,11 +786,9 @@ the <code class="python">RemoteCalculationFactory</code> class. It is in
  <code class="py-filename">calculus/remote_1.py</code> below. We
 call <code class="python">buildProtocol</code> to ask the factory to build us a
 protocol object that knows how to talk to our server.  We then make a fake
-network transport, an instance of <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.test.proto_helpers.
-.html" title="twisted.test.proto_helpers.
-">
-StringTransport</a></code> class (note that test packages are generally not part of
-Twisted's public API; <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.test.proto_helpers.html" title="twisted.test.proto_helpers">proto_helpers</a></code> is an exception).  This fake
+network transport, an instance of <code class="python">twisted.test.proto_helpers.StringTransport</code>
+class (note that test packages are generally not part of Twisted's public API;
+<code class="python">twisted.test.proto_helpers</code> is an exception).  This fake
 transport is the key to the communications. It is used to emulate a network
 connection without a network. The address and port passed to <code>buildProtocol</code>
 are typically used by the factory to choose to immediately deny remote connections; since we're using a fake transport, we can choose any value that will be acceptable to the factory. In this case the factory just ignores the address, so we don't need to pick anything in particular.</p>
@@ -916,7 +914,7 @@ following into <code class="py-filename">calculus/remote_1.py</code>:</p>
     <span class="py-src-variable">main</span>()
 </pre><div class="caption">Source listing - <a href="listings/trial/calculus/remote_1.py"><span class="filename">listings/trial/calculus/remote_1.py</span></a></div></div>
 
-<p>As mentioned, this server creates a protocol that inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.protocols.basic.LineReceiver.html" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a></code>, and then a
+<p>As mentioned, this server creates a protocol that inherits from <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.protocols.basic.LineReceiver.html" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a></code>, and then a
 factory that uses it as protocol. The only trick is the <code class="python">CalculationProxy</code> object, which calls <code class="python">Calculation</code> methods through <code class="python">remote_*</code> methods. This pattern is used frequently in
 Twisted, because it is very explicit about what methods you are making
 accessible.</p>
@@ -1120,11 +1118,11 @@ whereas you know they shouldn't, there is a problem in your tests.</p>
 </pre><div class="caption">Source listing - <a href="listings/trial/calculus/client_1.py"><span class="filename">listings/trial/calculus/client_1.py</span></a></div></div>
 
 
-<h2>More good pratices<a name="auto8"/></h2>
+<h2>More good practices<a name="auto8"/></h2>
 
 <h3>Testing scheduling<a name="auto9"/></h3>
 
-<p>When testing code that involves the passage of time, waiting e.g. for a two hour timeout to occur in a test is not very realistic. Twisted provides a solution to this, the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.task.Clock.html" title="twisted.internet.task.Clock">Clock</a></code> class that allows one to simulate the passage of time.</p>
+<p>When testing code that involves the passage of time, waiting e.g. for a two hour timeout to occur in a test is not very realistic. Twisted provides a solution to this, the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.task.Clock.html" title="twisted.internet.task.Clock">Clock</a></code> class that allows one to simulate the passage of time.</p>
 
 <p>As an example we'll test the code for client request timeout: since our client
 uses TCP it can hang for a long time (firewall, connectivity problems, etc...).
@@ -2039,6 +2037,6 @@ You can file tickets to improve this document
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

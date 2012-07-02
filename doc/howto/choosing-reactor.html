@@ -6,18 +6,19 @@
 
   <body bgcolor="white">
     <h1 class="title">Choosing a Reactor and GUI Toolkit Integration</h1>
-    <div class="toc"><ol><li><a href="#auto0">Overview</a></li><li><a href="#auto1">Reactor Functionality</a></li><li><a href="#auto2">General Purpose Reactors</a></li><ul><li><a href="#auto3">Select()-based Reactor</a></li></ul><li><a href="#auto4">Platform-Specific Reactors</a></li><ul><li><a href="#auto5">Poll-based Reactor</a></li><li><a href="#auto6">KQueue</a></li><li><a href="#auto7">WaitForMultipleObjects (WFMO) for Win32</a></li><li><a href="#auto8">Input/Output Completion Port (IOCP) for Win32</a></li><li><a href="#auto9">Epoll-based Reactor</a></li></ul><li><a href="#auto10">GUI Integration Reactors</a></li><ul><li><a href="#auto11">GTK+</a></li><li><a href="#auto12">wxPython</a></li><li><a href="#auto13">CoreFoundation</a></li></ul><li><a href="#auto14">Non-Reactor GUI Integration</a></li><ul><li><a href="#auto15">Tkinter</a></li><li><a href="#auto16">PyUI</a></li></ul></ol></div>
+    <div class="toc"><ol><li><a href="#auto0">Overview</a></li><li><a href="#auto1">Reactor Functionality</a></li><li><a href="#auto2">General Purpose Reactors</a></li><ul><li><a href="#auto3">Select()-based Reactor</a></li></ul><li><a href="#auto4">Platform-Specific Reactors</a></li><ul><li><a href="#auto5">Poll-based Reactor</a></li><li><a href="#auto6">KQueue</a></li><li><a href="#auto7">WaitForMultipleObjects (WFMO) for Win32</a></li><li><a href="#auto8">Input/Output Completion Port (IOCP) for Win32</a></li><li><a href="#auto9">Epoll-based Reactor</a></li></ul><li><a href="#auto10">GUI Integration Reactors</a></li><ul><li><a href="#auto11">GTK+</a></li><li><a href="#auto12">GTK+ 3.0 and GObject Introspection</a></li><li><a href="#auto13">wxPython</a></li><li><a href="#auto14">CoreFoundation</a></li></ul><li><a href="#auto15">Non-Reactor GUI Integration</a></li><ul><li><a href="#auto16">Tkinter</a></li><li><a href="#auto17">PyUI</a></li></ul></ol></div>
     <div class="content">
     <span/>
 
     <h2>Overview<a name="auto0"/></h2>
 
-    <p>Twisted provides a variety of implementations of the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.reactor.html" title="twisted.internet.reactor">twisted.internet.reactor</a></code>.  The specialized
+    <p>Twisted provides a variety of implementations of the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.reactor.html" title="twisted.internet.reactor">twisted.internet.reactor</a></code>.  The specialized
     implementations are suited for different purposes and are
     designed to integrate better with particular platforms.</p>
 
-    <p>The <a href="#select" shape="rect">select()-based reactor</a> is Twisted's
-    cross-platform reactor.</p>
+    <p>The <a href="#epoll" shape="rect">epoll()-based reactor</a> is Twisted's default on
+    Linux. Other platforms use <a href="#poll" shape="rect">poll()</a>, or the most
+    cross-platform reactor, <a href="#select" shape="rect">select()</a>.</p>
 
     <p>Platform-specific reactor implementations exist for:</p>
 
@@ -40,6 +41,7 @@
 
     <ul>
       <li><a href="#gtk" shape="rect">GTK+ 2.0</a></li>
+      <li><a href="#gtk3" shape="rect">GTK+ 3.0 and GObject Introspection</a></li>
       <li><a href="#tkinter" shape="rect">Tkinter</a></li>
       <li><a href="#wxpython" shape="rect">wxPython</a></li>
       <li><a href="#win32_wfmo" shape="rect">Win32</a></li>
@@ -78,16 +80,9 @@
 
     <h3>Select()-based Reactor<a name="auto3"/></h3><a name="select" shape="rect"/>
 
-    <p>The <code>select</code> reactor is currently the default reactor on all
-    platforms. The following code will install it, if no other reactor has
-    been installed:</p>
-
-<pre class="python"><p class="py-linenumber">1
-</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
-</pre>
-
-    <p>In the future, if another reactor becomes the default, but the
-    <code>select</code> reactor is desired, it may be installed via:</p>
+    <p>The <code>select</code> reactor is the default on platforms that don't
+    provide a better alternative that covers all use cases. If
+    the <code>select</code> reactor is desired, it may be installed via:</p>
 
 <pre class="python"><p class="py-linenumber">1
 2
@@ -119,7 +114,7 @@
     <h3>KQueue<a name="auto6"/></h3><a name="kqueue" shape="rect"/>
 
     <p>The KQueue Reactor allows Twisted to use FreeBSD's kqueue mechanism for
-       event scheduling. See instructions in the <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.kqreactor.html" title="twisted.internet.kqreactor">twisted.internet.kqreactor</a></code>'s
+       event scheduling. See instructions in the <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.kqreactor.html" title="twisted.internet.kqreactor">twisted.internet.kqreactor</a></code>'s
        docstring for installation notes.</p>
 
 <pre class="python"><p class="py-linenumber">1
@@ -220,7 +215,61 @@
 <span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
 </pre>
 
-    <h3>wxPython<a name="auto12"/></h3><a name="wxpython" shape="rect"/>
+    <h3>GTK+ 3.0 and GObject Introspection<a name="auto12"/></h3><a name="gtk3" shape="rect"/>
+
+    <p>Twisted integrates with <a href="http://gtk.org" shape="rect">GTK+ 3</a> and GObject
+    through <a href="http://live.gnome.org/PyGObject" shape="rect">PyGObject's</a>
+    introspection using the <code>gtk3reactor</code>
+    and <code>gireactor</code> reactors.</p>
+
+<pre class="python"><p class="py-linenumber">1
+2
+3
+4
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">gtk3reactor</span>
+<span class="py-src-variable">gtk3reactor</span>.<span class="py-src-variable">install</span>()
+
+<span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
+</pre>
+
+<pre class="python"><p class="py-linenumber">1
+2
+3
+4
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">gireactor</span> <span class="py-src-comment"># for non-GUI apps</span>
+<span class="py-src-variable">gireactor</span>.<span class="py-src-variable">install</span>()
+
+<span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
+</pre>
+
+    <p>GLib 3.0 introduces the concept of <code>GApplication</code>, a class
+    that handles application uniqueness in a cross-platform way and provides
+    its own main loop. Its counterpart <code>GtkApplication</code> also
+    handles application lifetime with respect to open windows. Twisted
+    supports registering these objects with the event loop, which should be
+    done before running the reactor:</p>
+
+<pre class="python"><p class="py-linenumber">1
+2
+3
+4
+5
+6
+7
+8
+9
+</p><span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">gtk3reactor</span>
+<span class="py-src-variable">gtk3reactor</span>.<span class="py-src-variable">install</span>()
+
+<span class="py-src-keyword">from</span> <span class="py-src-variable">gi</span>.<span class="py-src-variable">repository</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">Gtk</span>
+<span class="py-src-variable">app</span> = <span class="py-src-variable">Gtk</span>.<span class="py-src-variable">Application</span>(...)
+
+<span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
+<span class="py-src-variable">reactor</span>.<span class="py-src-variable">registerGApplication</span>(<span class="py-src-variable">app</span>)
+<span class="py-src-variable">reactor</span>.<span class="py-src-variable">run</span>()
+</pre>
+
+    <h3>wxPython<a name="auto13"/></h3><a name="wxpython" shape="rect"/>
 
     <p>Twisted currently supports two methods of integrating
     wxPython. Unfortunately, neither method will work on all wxPython
@@ -275,7 +324,7 @@
     <p>An example Twisted application that uses wxPython can be found
     in <code class="py-filename">doc/core/examples/wxdemo.py</code>.</p>
 
-    <h3>CoreFoundation<a name="auto13"/></h3><a name="cfreactor" shape="rect"/>
+    <h3>CoreFoundation<a name="auto14"/></h3><a name="cfreactor" shape="rect"/>
 
     <p>Twisted integrates with <a href="http://pyobjc.sf.net/" shape="rect">PyObjC</a> version 1.0. Sample applications using Cocoa and Twisted
     are available in the examples directory under
@@ -291,9 +340,9 @@
 <span class="py-src-keyword">from</span> <span class="py-src-variable">twisted</span>.<span class="py-src-variable">internet</span> <span class="py-src-keyword">import</span> <span class="py-src-variable">reactor</span>
 </pre>
 
-    <h2>Non-Reactor GUI Integration<a name="auto14"/></h2>
+    <h2>Non-Reactor GUI Integration<a name="auto15"/></h2>
 
-    <h3>Tkinter<a name="auto15"/></h3><a name="tkinter" shape="rect"/>
+    <h3>Tkinter<a name="auto16"/></h3><a name="tkinter" shape="rect"/>
 
     <p>The support for <a href="http://wiki.python.org/moin/TkInter" shape="rect">Tkinter</a> doesn't use a specialized reactor.  Instead, there is
     some specialized support code:</p>
@@ -322,7 +371,7 @@
 <span class="py-src-comment"># with &quot;reactor.stop()&quot;.</span>
 </pre>
 
-    <h3>PyUI<a name="auto16"/></h3><a name="pyui" shape="rect"/>
+    <h3>PyUI<a name="auto17"/></h3><a name="pyui" shape="rect"/>
 
     <p>As with <a href="#tkinter" shape="rect">Tkinter</a>, the support for integrating
     Twisted with a <a href="http://pyui.sourceforge.net" shape="rect">PyUI</a>
@@ -341,6 +390,6 @@
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

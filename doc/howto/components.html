@@ -253,7 +253,7 @@ discrete chunks. However, they are not very interesting without some more
 infrastructure. If each piece of code which wished to use an adapted object had
 to explicitly construct the adapter itself, the coupling between components
 would be too tight. We would like to achieve <q>loose coupling</q>, and this is
-where <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.components.html" title="twisted.python.components">twisted.python.components</a></code> comes in.</p>
+where <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.components.html" title="twisted.python.components">twisted.python.components</a></code> comes in.</p>
 
 <p>First, we need to discuss Interfaces in more detail. As we mentioned
 earlier, an Interface is nothing more than a class which is used as a marker.
@@ -505,8 +505,8 @@ I was plugged in properly and am operating
 subclass declares that it implements another interface, the implements will be
 inherited by default.</p>
 
-<p>For example, <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> is a class
-which implements <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.spread.pb.IPBRoot.html" title="twisted.spread.pb.IPBRoot">IPBRoot</a></code>. This interface indicates that an
+<p>For example, <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.Root.html" title="twisted.spread.pb.Root">pb.Root</a></code> is a class
+which implements <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.spread.pb.IPBRoot.html" title="twisted.spread.pb.IPBRoot">IPBRoot</a></code>. This interface indicates that an
 object has remotely-invokable methods and can be used as the initial object
 served by a new Broker instance. It has an <code>implements</code> setting
 like:</p>
@@ -598,6 +598,6 @@ False
 </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>

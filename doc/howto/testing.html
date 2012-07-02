@@ -39,7 +39,7 @@ about polluting the current working directory.</p>
 created if two instances of Trial are run in parallel from the same directory,
 so as to avoid giving two different test-runs the same temporary directory.</p>
 
-<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.python.lockfile.html" title="twisted.python.lockfile">twisted.python.lockfile</a></code> utility is used to lock
+<p>The <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.python.lockfile.html" title="twisted.python.lockfile">twisted.python.lockfile</a></code> utility is used to lock
 the <code class="shell">_trial_temp</code> directories. On Linux, this results
 in symlinks to pids. On Windows, directories are created with a single file with
 a pid as the contents. These lock files will be cleaned up if Trial exits normally
@@ -73,7 +73,7 @@ The <code>tearDown</code> method is a good place to put cleanup code: it is
 always run regardless of whether your test passes or fails (like a <code>finally</code>
 clause in a try-except-finally construct). Exceptions in <code>tearDown</code>
 are flagged as errors and flunk the test. 
- <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.trial.unittest.TestCase.addCleanup.html" title="twisted.trial.unittest.TestCase.addCleanup">TestCase.addCleanup</a></code> is
+ <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.trial.unittest.TestCase.addCleanup.html" title="twisted.trial.unittest.TestCase.addCleanup">TestCase.addCleanup</a></code> is
 another useful tool for cleaning up.  With it, you can register callables to
 clean up resources as the test allocates them.  Generally, code should be
 written so that only resources allocated in the tests need to be cleaned up in
@@ -86,21 +86,21 @@ do the right thing. That is, it will run the reactor for you until the
 Deferred has triggered and its callbacks have been run. Don't use 
  <code>reactor.run()</code>, <code>reactor.stop()</code>, <code>reactor.crash()</code> or <code>reactor.iterate()</code> in your tests.</p>
 
-<p>Calls to <code>reactor.callLater</code> create <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IDelayedCall.html" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code>s.  These need to be run
+<p>Calls to <code>reactor.callLater</code> create <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IDelayedCall.html" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code>s.  These need to be run
 or cancelled during a test, otherwise they will outlive the test.  This would
 be bad, because they could interfere with a later test, causing confusing
 failures in unrelated tests!  For this reason, Trial checks the reactor to make
-sure there are no leftover <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IDelayedCall.html" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code>s in the reactor after a
+sure there are no leftover <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IDelayedCall.html" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code>s in the reactor after a
 test, and will fail the test if there are.  The cleanest and simplest way to
 make sure this all works is to return a Deferred from your test.</p>
 
 <p>Similarly, sockets created during a test should be closed by the end of the
 test.  This applies to both listening ports and client connections.  So, calls
 to <code>reactor.listenTCP</code> (and <code>listenUNIX</code>, and so on)
-return <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IListeningPort.html" title="twisted.internet.interfaces.IListeningPort">IListeningPort</a></code>s, and these should be
-cleaned up before a test ends by calling their <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IListeningPort.stopListening.html" title="twisted.internet.interfaces.IListeningPort.stopListening">stopListening</a></code> method.
-Calls to <code>reactor.connectTCP</code> return <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IConnector.html" title="twisted.internet.interfaces.IConnector">IConnector</a></code>s, which should be cleaned
-up by calling their <code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.internet.interfaces.IConnector.disconnect.html" title="twisted.internet.interfaces.IConnector.disconnect">disconnect</a></code> method.  Trial
+return <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IListeningPort.html" title="twisted.internet.interfaces.IListeningPort">IListeningPort</a></code>s, and these should be
+cleaned up before a test ends by calling their <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IListeningPort.stopListening.html" title="twisted.internet.interfaces.IListeningPort.stopListening">stopListening</a></code> method.
+Calls to <code>reactor.connectTCP</code> return <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IConnector.html" title="twisted.internet.interfaces.IConnector">IConnector</a></code>s, which should be cleaned
+up by calling their <code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.internet.interfaces.IConnector.disconnect.html" title="twisted.internet.interfaces.IConnector.disconnect">disconnect</a></code> method.  Trial
 will warn about unclosed sockets.</p>
 
 <p>The golden rule is: If your tests call a function which returns a Deferred,
@@ -130,7 +130,7 @@ in unusual cases.</p>
 be written test-driven, just as any other code would be.  It also improves
 the way in which warnings reporting when a test suite is running.</p>
 
-<p><code class="API"><a href="http://twistedmatrix.com/documents/12.0.0/api/twisted.trial.unittest.TestCase.flushWarnings.html" title="twisted.trial.unittest.TestCase.flushWarnings">TestCase.flushWarnings</a></code>
+<p><code class="API"><a href="http://twistedmatrix.com/documents/12.1.0/api/twisted.trial.unittest.TestCase.flushWarnings.html" title="twisted.trial.unittest.TestCase.flushWarnings">TestCase.flushWarnings</a></code>
 allows tests to be written which make assertions about what warnings have
 been emitted during a particular test method. In order to test a warning with 
  <code>flushWarnings</code>, write a test which first invokes the code which
@@ -162,6 +162,6 @@ scope in a test module or a module imported by a test module) then it
   </div>
 
     <p><a href="index.html">Index</a></p>
-    <span class="version">Version: 12.0.0</span>
+    <span class="version">Version: 12.1.0</span>
   </body>
 </html>
